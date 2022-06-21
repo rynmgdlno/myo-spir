@@ -1,0 +1,130 @@
+[
+  {
+    "projectType": "nextjs"
+  },
+  [
+    {
+      "name": "pages",
+      "type": "directory",
+      "children": [
+        {
+          "name": "about",
+          "type": "page"
+        },
+        {
+          "name": "what-it-is",
+          "type": "page"
+        },
+        {
+          "name": "how-it-works",
+          "type": "page"
+        },
+        {
+          "name": "information",
+          "type": "page"
+        },
+        {
+          "name": "contact",
+          "type": "page"
+        },
+        {
+          "name": "referrals",
+          "type": "page"
+        },
+        {
+          "name": "appointments",
+          "type": "page"
+        },
+        {
+          "name": "blog",
+          "type": "page",
+          "children": [
+            {
+              "name": "blog-post",
+              "type": "page"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "src",
+      "type": "directory",
+      "children": [
+        {
+          "name": "components",
+          "type": "directory",
+          "children": [
+            {
+              "name": "button",
+              "type": "component"
+            },
+            {
+              "name": "formInput",
+              "type": "component"
+            },
+            {
+              "name": "footer",
+              "type": "component"
+            },
+            {
+              "name": "header",
+              "type": "component"
+            },
+            {
+              "name": "layout",
+              "type": "component"
+            },
+            {
+              "name": "svg",
+              "type": "directory"
+            }
+          ]
+        },
+        {
+          "name": "contentful",
+          "type": "directory",
+          "children": [
+            {
+              "name": "index.js",
+              "type": "file"
+            }
+          ]
+        },
+        {
+          "name": "",
+          "type": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "styles",
+      "type": "directory",
+      "children": [
+        {
+          "name": "variables.scss",
+          "type": "file"
+        },
+        {
+          "name": "button.scss",
+          "type": "file"
+        },
+        {
+          "name": "formInput.scss",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "name": "public",
+      "type": "directory",
+      "children": [
+        {
+          "name": "assets",
+          "type": "directory"
+        }
+      ]
+    }
+  ]
+]
