@@ -5,19 +5,19 @@ import { CSSTransition } from "react-transition-group";
 import Hamburger from "hamburger-react";
 
 import Button from "../button";
+import { menuTree } from "../../generative/menuTree";
 
 import styles from "./header.module.scss";
-
-import { menuTree } from "../../generative/menuTree";
+import rtg from "./CSSTransitions.module.scss";
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
-  // const { menuTree } = props
+
   return (
     <div className={styles.header}>
       <p>Header</p>
       <Hamburger toggled={isOpen} toggle={setIsOpen} color="#000" size={24} />
-      <Menu menuTree={menuTree} isOpen={isOpen}/>
+      <Menu menuTree={menuTree} isOpen={isOpen} />
     </div>
   );
 };
@@ -26,9 +26,8 @@ export default Header;
 
 const Menu = ({ isOpen, menuTree }) => {
   const [menuToggle, setMenuToggle] = useState(null);
-
   const menuClass = isOpen ? `${styles.open}` : `${styles.closed}`;
-  console.log(menuClass)
+
   return (
     <nav className={`${styles.menu} ${menuClass}`}>
       {menuTree.map(entry =>
@@ -46,7 +45,7 @@ const Menu = ({ isOpen, menuTree }) => {
 };
 
 const MenuItem = ({ isMobile, name, children, menuToggle, setMenuToggle }) => {
-  const dropDownRef = useRef(null);
+  // const dropDownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(
@@ -70,18 +69,30 @@ const MenuItem = ({ isMobile, name, children, menuToggle, setMenuToggle }) => {
   );
 
   return (
-    <nav ref={dropDownRef}>
-      <Button>
+    <nav>
+      <Button onClick={() => setIsOpen(!isOpen)}>
         {name}
       </Button>
       {children &&
-        <nav className={styles.subMenu}>
-          {children.map(child =>
-            <Button key={child.id}>
-              {child.name}
-            </Button>
-          )}
-        </nav>}
+        <CSSTransition
+          in={isOpen}
+          timeout={200}
+          classNames={{
+            enterActive: rtg.enterActive,
+            enterDone: rtg.enterDone,
+            exitDone: rtg.exitDone,
+            exitActive: rtg.exitActive
+          }}
+          // unmountOnExit
+        >
+          <nav className={styles.subMenu}>
+            {children.map(child =>
+              <Button key={child.id}>
+                {child.name}
+              </Button>
+            )}
+          </nav>
+        </CSSTransition>}
     </nav>
   );
 };
