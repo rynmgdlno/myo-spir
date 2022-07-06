@@ -1,0 +1,12 @@
+{
+  "apps": [
+    {
+      "name": "myospir",
+      "cwd": "/deploy/myo-spir",
+      "script": "yarn",
+      "args": "start",
+      "instance": "max",
+      "exec_mode": "fork"
+    }
+  ]
+}
