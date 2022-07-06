@@ -1,0 +1,10 @@
+.menuButton {
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  background-color: var(--transparent);
+  height: var(--menuItemHeight);
+  font-size: var(--menuItemFontSize);
+  padding: 0;
+  margin: 0;
+}

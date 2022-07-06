@@ -5,7 +5,7 @@ import { getOrderedCollection } from "../src/contentful";
 
 import Header from "../src/components/header";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 export const getStaticProps = async () => {
   return {
@@ -23,6 +23,7 @@ const Home = props => {
       </Head>
 
       <main className={styles.main}>
+        <div className={styles.bgImage}>Home Page</div>
         {/* <Header menuTree={props.items}/> */}
       </main>
     </div>
@@ -30,4 +31,3 @@ const Home = props => {
 };
 
 export default Home;
-
