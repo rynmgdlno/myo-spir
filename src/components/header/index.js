@@ -81,9 +81,9 @@ const MenuItem = ({
 
   const closed = {
     height: itemHeight,
-    opacity: activeIndex !== null && .3,
-    pointerEvents: activeIndex !== null && !children && "none",
-    cursor: activeIndex !== null && "default"
+    // opacity: activeIndex !== null && .3,
+    // pointerEvents:  activeIndex !== null && !children && "none",
+    // cursor: activeIndex != null && "crosshair"
   };
 
   // useEffect(
