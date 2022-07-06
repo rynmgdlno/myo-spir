@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import styles from "./blog.module.scss";
+import styles from "../blog.module.scss";
 
 const Blog = () => {
   return (
