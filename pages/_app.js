@@ -2,7 +2,7 @@ import Layout from "../src/components/layout";
 
 import "../styles/button.scss";
 import "../styles/globals.css";
-import "../styles/variables.css"
+import "../styles/variables.css";
 
 function MyApp({ Component, pageProps }) {
   

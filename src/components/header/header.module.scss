@@ -7,83 +7,24 @@
   position: absolute;
   background-color: white;
 
-  .menuContainer {
-    width: 100vw;
-    height: calc(100vh - 40px);
+  .menu {
+    background-color: rgba(255,255,255,.7);
     position: absolute;
     top: 40px;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background-color: rgba(0, 0, 0, .8);
-    transition: right .1s ease-in-out;
+    width: 100vw;
+    height: calc(100vh - 40px);
+    transition: right .2s ease-in-out;
+
+    &.closed {
+      right: 100%;
+    }
 
     &.open {
       right: 0;
     }
 
-    &.closed {
-      right: -100vw;
-    }
-
-    .menu {
-      max-height: 90%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      nav { // menu item
-        margin-bottom: var(--menuItemHeight);
-        transition: height .2s ease-in-out, opacity .2s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100vw;
-        
-        .submenuClosed {
-          opacity: 0;
-          visibility: hidden;
-        }
-        
-        .submenuOpen {
-          opacity: 1;
-          visibility: visible;
-        }
-
-        nav { // submenu wrapper
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          // color: white;
-          padding: calc(var(--menuItemHeight)/2) 0;
-          margin: calc(var(--menuItemHeight)/2) 0;
-          background-color: rgba(255,255,255,.1);
-          
-          // &::after {
-          //   mix-blend-mode: soft-light;
-          //   width: 100%;
-          //   height: 100%;
-          //   // background-color: red;
-          //   position: absolute;
-          //   top: 0;
-          //   right: 0;
-          //   // border: 1px solid red;
-          //   content: '';
-          // }
-
-          a {
-            margin-bottom: var(--menuItemHeight);
-          }
-
-          a:last-of-type {
-            margin-bottom: 0;
-          }
-        }
-      }
+    .subMenu {
+      border: 1px solid red;
     }
   }
-
 }

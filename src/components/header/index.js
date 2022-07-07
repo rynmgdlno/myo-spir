@@ -8,10 +8,11 @@ import Button from "../button";
 import { menuTree } from "../../generative/menuTree";
 
 import styles from "./header.module.scss";
+// import menuTransition from './CSSTransitions.module.scss'
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
-  const device = useWindowSize();
+  // const device = useWindowSize();
 
   return (
     <div className={styles.header}>
@@ -38,9 +39,9 @@ const Menu = ({ isOpen, menuTree }) => {
   };
 
   return (
-    <nav className={`${styles.menuContainer} ${menuClass}`}>
-      <div className={styles.menu}>
-        {menuTree.map(entry =>
+    // <nav className={`${styles.menuContainer} ${menuClass}`}>
+    <div className={`${styles.menu} ${menuClass}`}>
+      {menuTree.map(entry =>
           <MenuItem
             activeIndex={activeIndex}
             key={entry.id}
@@ -54,60 +55,16 @@ const Menu = ({ isOpen, menuTree }) => {
             {entry.children}
           </MenuItem>
         )}
-      </div>
-    </nav>
+    </div>
   );
 };
 
-const MenuItem = ({
-  activeIndex,
-  id,
-  isMobile,
-  link,
-  name,
-  children,
-  menuToggle,
-  setMenuToggle,
-  toggleSubMenu
-}) => {
+const MenuItem = ({ activeIndex, id, link, name, children, toggleSubMenu }) => {
   const dropDownRef = useRef(null);
-  const [itemHeight, setItemHeight] = useState(25);
-  const openHeight = children ? (children.length * 2) * itemHeight : itemHeight;
   const isActive = id !== activeIndex ? false : true;
 
-  const open = {
-    height: openHeight,
-  };
-
-  const closed = {
-    height: itemHeight,
-    // opacity: activeIndex !== null && .3,
-    // pointerEvents:  activeIndex !== null && !children && "none",
-    // cursor: activeIndex != null && "crosshair"
-  };
-
-  // useEffect(
-  //   () => {
-  //     const pageClick = e => {
-  //       if (
-  //         dropDownRef.current !== null &&
-  //         !dropDownRef.current.contains(e.target)
-  //       ) {
-  //         setIsOpen(false);
-  //       }
-  //       if (isOpen) {
-  //         window.addEventListener("click", pageClick);
-  //       }
-  //     };
-  //     return () => {
-  //       window.removeEventListener("click", pageClick);
-  //     };
-  //   },
-  //   []
-  // );
-
   return (
-    <nav style={isActive ? open : closed} ref={dropDownRef}>
+    <nav ref={dropDownRef}>
       {children
         ? <Button
             className="menuButton"
@@ -115,7 +72,7 @@ const MenuItem = ({
               toggleSubMenu(id);
             }}
           >
-            {isActive ? `${name} -` : `${name} +`}
+            {`${name} +`}
           </Button>
         : <Link href={`${link}`}>
             <a>
@@ -126,8 +83,8 @@ const MenuItem = ({
         <nav
           className={
             id !== activeIndex
-              ? `${styles.submenuClosed}`
-              : `${styles.submenuOpen}`
+              ? `${styles.subMenu} ${styles.closed}`
+              : `${styles.subMenu} ${styles.open}`
           }
         >
           {children.map(child =>
