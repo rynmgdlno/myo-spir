@@ -41,23 +41,25 @@ const Menu = ({ isOpen, setIsOpen, menuTree }) => {
 
   return (
     // <nav className={`${styles.menuContainer} ${menuClass}`}>
-    <div className={`${styles.menu} ${menuSlide} ${subMenuSlide}`}>
-      {menuTree.map(entry =>
-        <MenuItem
-          activeIndex={activeIndex}
-          key={entry.id}
-          setIsOpen={setIsOpen}
-          id={entry.id}
-          isOpen={isOpen}
-          link={entry.link}
-          name={entry.name}
-          menuToggle={menuToggle}
-          setMenuToggle={setMenuToggle}
-          toggleSubMenu={toggleSubMenu}
-        >
-          {entry.children}
-        </MenuItem>
-      )}
+    <div className={`${styles.menuContainer} ${menuSlide} ${subMenuSlide}`}>
+      <div className={styles.menu}>
+        {menuTree.map(entry =>
+          <MenuItem
+            activeIndex={activeIndex}
+            key={entry.id}
+            setIsOpen={setIsOpen}
+            id={entry.id}
+            isOpen={isOpen}
+            link={entry.link}
+            name={entry.name}
+            menuToggle={menuToggle}
+            setMenuToggle={setMenuToggle}
+            toggleSubMenu={toggleSubMenu}
+          >
+            {entry.children}
+          </MenuItem>
+        )}
+      </div>
     </div>
   );
 };
@@ -75,11 +77,18 @@ const MenuItem = ({
   const dropDownRef = useRef(null);
   const isActive = id !== activeIndex ? false : true;
 
-  useEffect(() => {
-    if (!isOpen && activeIndex !== null) {
-      toggleSubMenu(id)
-    }
-  }, [isOpen, activeIndex, toggleSubMenu, id])
+  useEffect(
+    () => {
+      if (!isOpen && activeIndex !== null) {
+        toggleSubMenu(id);
+      }
+    },
+    [isOpen, activeIndex, toggleSubMenu, id]
+  );
+
+  const onTest = () => {
+    console.log('test')
+  }
 
   return (
     <nav ref={dropDownRef} className={styles.menuEntry}>
@@ -90,37 +99,42 @@ const MenuItem = ({
               toggleSubMenu(id);
             }}
           >
-            {`${name} +`}
+            {`${name}`}
           </Button>
         : <Link href={`${link}`}>
-            <a>
+            <a onClick={() => setIsOpen(null)}>
               {name}
             </a>
           </Link>}
       {children &&
-        <nav
+        <div
           className={
             id !== activeIndex
-              ? `${styles.subMenu} ${styles.closed}`
-              : `${styles.subMenu} ${styles.open}`
+              ? `${styles.subMenuContainer} ${styles.closed}`
+              : `${styles.subMenuContainer} ${styles.open}`
           }
         >
-          {children.map(child =>
-            <Link key={child.id} href={`${child.link}`}>
-              <a>
-                {child.name}
-              </a>
-            </Link>
-          )}
-          <Button
-            className="menuItemButton"
-            onClick={() => {
-              toggleSubMenu(id);
-            }}
-          >
-            BACK
-          </Button>
-        </nav>}
+          <nav>
+            <h4>
+              {name}
+            </h4>
+            {children.map(child =>
+              <Link key={child.id} href={`${child.link}`}>
+                <a onClick={() => setIsOpen(null)}>
+                  {child.name}
+                </a>
+              </Link>
+            )}
+            <Button
+              className="menuItemButton"
+              onClick={() => {
+                toggleSubMenu(id);
+              }}
+            >
+              BACK
+            </Button>
+          </nav>
+        </div>}
     </nav>
   );
 };
