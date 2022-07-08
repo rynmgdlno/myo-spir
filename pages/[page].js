@@ -3,11 +3,16 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import {
-  getOrderedCollection,
   getCollection,
   getSlugEntry
-} from "../src/contentful";
+} from "../src/contentful/index.js";
 import { renderOptions } from "../src/contentful/richText";
+
+import {
+  AppointmentForm,
+  ContactForm,
+  ReferralForm
+} from "../src/components/forms";
 
 import styles from "./page.module.scss";
 
@@ -50,8 +55,6 @@ const Page = props => {
       }
     : null;
 
-  console.log(pageMainImage);
-
   return (
     <div className={styles.page}>
       <Head>
@@ -70,6 +73,9 @@ const Page = props => {
             alt={mainImage.alt}
           />}
         {data && documentToReactComponents(pageMainBodyText, renderOptions)}
+        {title.toLowerCase() === "contact" && <ContactForm />}
+        {title.toLowerCase() === "referrals" && <ReferralForm />}
+        {title.toLowerCase() === "book an appointment" && <AppointmentForm />}
       </main>
     </div>
   );

@@ -1,9 +1,11 @@
+const contentful = require("contentful");
+
 // env variables
 const space = process.env.NEXT_PUBLIC_SPACE_ID;
 const accessToken = process.env.NEXT_PUBLIC_CD_ACCESS_TOKEN;
 
 // creating the client
-export const client = require("contentful").createClient({
+export const client = contentful.createClient({
   space: space,
   accessToken: accessToken
 });
