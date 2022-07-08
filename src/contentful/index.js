@@ -31,3 +31,13 @@ export const getSingleEntry = async entryId => {
   const entry = await client.getEntry(entryId);
   return entry;
 };
+
+// function for retrieving a single entry by slug
+export const getSlugEntry = async (contentType, slug) => {
+  const entry = await client.getEntries({
+    content_type: `${contentType}`,
+    "fields.slug": slug
+  });
+  return entry;
+};
+

@@ -1,18 +1,80 @@
 import Head from "next/head";
+import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-const Page = () => {
+import {
+  getOrderedCollection,
+  getCollection,
+  getSlugEntry
+} from "../src/contentful";
+import { renderOptions } from "../src/contentful/richText";
+
+import styles from "./page.module.scss";
+
+// Generating routes on build from Contentful "page" entries
+// using "slug" as URL:
+export const getStaticPaths = async () => {
+  const pages = await getCollection("page");
+  const paths = pages.items.map(page => {
+    return {
+      params: { page: page.fields.slug }
+    };
+  });
+  return {
+    paths,
+    fallback: false
+  };
+};
+
+// Getting page content per route based on slug:
+export const getStaticProps = async context => {
+  const { page } = context.params;
+  const data = await getSlugEntry("page", page);
+  return {
+    props: {
+      data
+    }
+  };
+};
+
+const Page = props => {
+  const data = props.data.items[0];
+  const { pageMainImage, title, pageMainBodyText } = data.fields;
+  const mainImage = pageMainImage
+    ? {
+        title: pageMainImage.fields.title,
+        alt: pageMainImage.fields.description,
+        url: `https:${pageMainImage.fields.file.url}`,
+        width: pageMainImage.fields.file.details.image.width,
+        height: pageMainImage.fields.file.details.image.height
+      }
+    : null;
+
+  console.log(pageMainImage);
+
   return (
-    <main>
+    <div className={styles.page}>
       <Head>
-        <title>Page</title>
+        <title>
+          {title}
+        </title>
         <meta name="Page" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-
-      </div>
-    </main>
+      <main>
+        {pageMainImage &&
+          <Image
+            src={mainImage.url}
+            height={mainImage.height}
+            width={mainImage.width}
+            alt={mainImage.alt}
+          />}
+        {data && documentToReactComponents(pageMainBodyText, renderOptions)}
+      </main>
+    </div>
   );
 };
 
-export default Page
+export default Page;
