@@ -23,8 +23,7 @@ const Home = props => {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.bgImage}>Home Page</div>
-        {/* <Header menuTree={props.items}/> */}
+
       </main>
     </div>
   );

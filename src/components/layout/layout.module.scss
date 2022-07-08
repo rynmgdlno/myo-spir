@@ -1,0 +1,14 @@
+.layout {
+
+  .bgImage {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../../../public/images/website-banner.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+}
