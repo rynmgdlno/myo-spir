@@ -23,8 +23,28 @@
       right: 0;
     }
 
-    .subMenu {
-      border: 1px solid red;
+    &.subMenuSlide {
+      right: 100%;
+    }
+
+    .menuEntry {
+      position: relative;
+      // border: 1px solid red;
+
+      .subMenu {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        transition: left .2s ease-in-out;
+
+        &.closed {
+          left: 100%;
+        }
+    
+        &.open {
+          left: 0;
+        }
+      }
     }
   }
 }

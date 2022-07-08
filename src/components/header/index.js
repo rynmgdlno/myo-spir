@@ -18,17 +18,18 @@ const Header = props => {
     <div className={styles.header}>
       <p>Myo-Spir</p>
       <Hamburger toggled={isOpen} toggle={setIsOpen} color="#000" size={24} />
-      <Menu menuTree={menuTree} isOpen={isOpen} />
+      <Menu menuTree={menuTree} isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
 
 export default Header;
 
-const Menu = ({ isOpen, menuTree }) => {
+const Menu = ({ isOpen, setIsOpen, menuTree }) => {
   const [menuToggle, setMenuToggle] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
-  const menuClass = !isOpen ? `${styles.closed}` : `${styles.open}`;
+  const menuSlide = !isOpen ? `${styles.closed}` : `${styles.open}`;
+  const subMenuSlide = activeIndex !== null && `${styles.subMenuSlide}`;
 
   const toggleSubMenu = id => {
     if (id === activeIndex) {
@@ -40,34 +41,51 @@ const Menu = ({ isOpen, menuTree }) => {
 
   return (
     // <nav className={`${styles.menuContainer} ${menuClass}`}>
-    <div className={`${styles.menu} ${menuClass}`}>
+    <div className={`${styles.menu} ${menuSlide} ${subMenuSlide}`}>
       {menuTree.map(entry =>
-          <MenuItem
-            activeIndex={activeIndex}
-            key={entry.id}
-            id={entry.id}
-            link={entry.link}
-            name={entry.name}
-            menuToggle={menuToggle}
-            setMenuToggle={setMenuToggle}
-            toggleSubMenu={toggleSubMenu}
-          >
-            {entry.children}
-          </MenuItem>
-        )}
+        <MenuItem
+          activeIndex={activeIndex}
+          key={entry.id}
+          setIsOpen={setIsOpen}
+          id={entry.id}
+          isOpen={isOpen}
+          link={entry.link}
+          name={entry.name}
+          menuToggle={menuToggle}
+          setMenuToggle={setMenuToggle}
+          toggleSubMenu={toggleSubMenu}
+        >
+          {entry.children}
+        </MenuItem>
+      )}
     </div>
   );
 };
 
-const MenuItem = ({ activeIndex, id, link, name, children, toggleSubMenu }) => {
+const MenuItem = ({
+  activeIndex,
+  id,
+  isOpen,
+  setIsOpen,
+  link,
+  name,
+  children,
+  toggleSubMenu
+}) => {
   const dropDownRef = useRef(null);
   const isActive = id !== activeIndex ? false : true;
 
+  useEffect(() => {
+    if (!isOpen && activeIndex !== null) {
+      toggleSubMenu(id)
+    }
+  }, [isOpen, activeIndex, toggleSubMenu, id])
+
   return (
-    <nav ref={dropDownRef}>
+    <nav ref={dropDownRef} className={styles.menuEntry}>
       {children
         ? <Button
-            className="menuButton"
+            className="menuItemButton"
             onClick={() => {
               toggleSubMenu(id);
             }}
@@ -94,6 +112,14 @@ const MenuItem = ({ activeIndex, id, link, name, children, toggleSubMenu }) => {
               </a>
             </Link>
           )}
+          <Button
+            className="menuItemButton"
+            onClick={() => {
+              toggleSubMenu(id);
+            }}
+          >
+            BACK
+          </Button>
         </nav>}
     </nav>
   );
