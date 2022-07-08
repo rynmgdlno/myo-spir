@@ -1,7 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import gfm from "remark-gfm";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import {
