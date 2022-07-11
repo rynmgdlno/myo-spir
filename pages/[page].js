@@ -2,10 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import {
-  getCollection,
-  getSlugEntry
-} from "../src/contentful/index.js";
+import { getCollection, getSlugEntry } from "../src/contentful/index.js";
 import { renderOptions } from "../src/contentful/richText";
 
 import {
@@ -66,13 +63,17 @@ const Page = props => {
       </Head>
       <main>
         {pageMainImage &&
-          <Image
-            src={mainImage.url}
-            height={mainImage.height}
-            width={mainImage.width}
-            alt={mainImage.alt}
-          />}
-        {data && documentToReactComponents(pageMainBodyText, renderOptions)}
+          <div className={styles.mainImage}>
+            <Image
+              src={mainImage.url}
+              height={mainImage.height}
+              width={mainImage.width}
+              alt={mainImage.alt}
+            />
+          </div>}
+        <section>
+          {data && documentToReactComponents(pageMainBodyText, renderOptions)}
+        </section>
         {title.toLowerCase() === "contact" && <ContactForm />}
         {title.toLowerCase() === "referrals" && <ReferralForm />}
         {title.toLowerCase() === "book an appointment" && <AppointmentForm />}

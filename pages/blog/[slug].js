@@ -37,7 +37,7 @@ export const getStaticProps = async context => {
 
 const Blog = props => {
   const data = props.data.items[0];
-  const { bodyText, date, image, title } = data.fields;
+  const { bodyText, date, description, image, title } = data.fields;
   const mainImage = {
     title: image.fields.title,
     alt: image.fields.description,
@@ -75,9 +75,10 @@ const Blog = props => {
               <p>
                 {date}
               </p>
-              <h2>
+              <h1>
                 {title}
-              </h2>
+              </h1>
+              <h2>{description}</h2>
               {data && documentToReactComponents(bodyText, renderOptions)}
             </div>
           </div>

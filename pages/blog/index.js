@@ -67,9 +67,9 @@ const BlogCard = ({ data, key }) => {
             <p>
               {date}
             </p>
-            <h2>
+            <h3>
               {title}
-            </h2>
+            </h3>
             <p>
               {description}
             </p>

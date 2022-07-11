@@ -7,5 +7,11 @@
   font-size: var(--menuItemFontSize);
   padding: 0;
   margin: 0;
-  // color: white;
+  color: var(--fontMenu);
+}
+
+@media screen and (min-width: 1113px) {
+  .menuItemButton {
+    font-weight: 200;
+  }
 }

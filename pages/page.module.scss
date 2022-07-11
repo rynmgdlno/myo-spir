@@ -1,24 +1,52 @@
 .page {
-  margin: 6rem 1rem 0;
+  
   main {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     z-index: 1;
-    p {
-      margin: 3rem 0;
+    
+    .mainImage {
+      overflow: hidden;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
-    ul {
-      border: 1px solid white;
-      border-radius: 1rem;
-      background-color: rgba(0,0,0,.8);
-      color: white;
-      margin: 3rem 1rem;
-
-      p, li {
-        margin: 1rem 0;
+    
+    section {
+      background-color: var(--backgroundDarkOpaque);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      margin-top: 2rem;
+      padding: 1rem;
+      p {
+        // margin: 3rem 0;
       }
+  
+      ul {
+        // border: 1px solid white;
+        // border-radius: 1rem;
+        // background-color: rgba(0,0,0,.8);
+        // color: white;
+        // margin: 3rem 1rem;
+  
+        p,
+        li {
+          margin: 1rem 0;
+        }
+      }
+
     }
-    img {
-      // max-width: 95vw;
-      border: 1px solid red;
-    }
+
   }
+}
+
+@media screen and (min-width: 1113px) {
+ .page {
+   
+   main {
+    border-radius: 10px;
+    margin-top: 8rem;
+  }
+ }
 }

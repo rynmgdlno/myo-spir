@@ -3,29 +3,48 @@ import Link from "next/link";
 
 import Hamburger from "hamburger-react";
 
-import { useWindowSize } from "../../hooks/mediaHook";
+import { useWindowSize, mobileSizes } from "../../hooks/mediaHook";
 import Button from "../button";
 import { menuTree } from "../../generative/menuTree";
+
+import Twitter from "../svg/twitter";
 
 import styles from "./header.module.scss";
 // import menuTransition from './CSSTransitions.module.scss'
 
 const Header = props => {
   const [isOpen, setIsOpen] = useState(false);
-  // const device = useWindowSize();
+  const device = useWindowSize();
+  const showFullMenu = !mobileSizes.includes(device) ? true : false;
+  const headerClass = showFullMenu
+    ? `${styles.headerLarge}`
+    : `${styles.headerMobile}`;
 
   return (
-    <div className={styles.header}>
-      <p>Myo-Spir</p>
-      <Hamburger toggled={isOpen} toggle={setIsOpen} color="#000" size={24} />
-      <Menu menuTree={menuTree} isOpen={isOpen} setIsOpen={setIsOpen} />
+    <div className={headerClass}>
+      <div className={styles.headerWrapper}>
+        <Link href="/">
+          <a>
+            <Twitter className={styles.logo} />
+          </a>
+        </Link>
+            <h1 className={styles.title}>Myo-Spir</h1>
+        {!showFullMenu &&
+          <Hamburger
+            toggled={isOpen}
+            toggle={setIsOpen}
+            color="#000"
+            size={24}
+          />}
+        <Menu menuTree={menuTree} isOpen={isOpen} setIsOpen={setIsOpen} showFullMenu={showFullMenu}/>
+      </div>
     </div>
   );
 };
 
 export default Header;
 
-const Menu = ({ isOpen, setIsOpen, menuTree }) => {
+const Menu = ({ isOpen, setIsOpen, menuTree, showFullMenu }) => {
   const [menuToggle, setMenuToggle] = useState(null);
   const [activeIndex, setActiveIndex] = useState(null);
   const menuSlide = !isOpen ? `${styles.closed}` : `${styles.open}`;
@@ -54,6 +73,7 @@ const Menu = ({ isOpen, setIsOpen, menuTree }) => {
             name={entry.name}
             menuToggle={menuToggle}
             setMenuToggle={setMenuToggle}
+            showFullMenu={showFullMenu}
             toggleSubMenu={toggleSubMenu}
           >
             {entry.children}
@@ -72,23 +92,21 @@ const MenuItem = ({
   link,
   name,
   children,
+  showFullMenu,
   toggleSubMenu
 }) => {
   const dropDownRef = useRef(null);
   const isActive = id !== activeIndex ? false : true;
 
+  // closes submenu on hamburger click (mobile only)
   useEffect(
     () => {
-      if (!isOpen && activeIndex !== null) {
+      if (!showFullMenu && !isOpen && activeIndex !== null) {
         toggleSubMenu(id);
       }
     },
-    [isOpen, activeIndex, toggleSubMenu, id]
+    [showFullMenu, isOpen, activeIndex, toggleSubMenu, id]
   );
-
-  const onTest = () => {
-    console.log('test')
-  }
 
   return (
     <nav ref={dropDownRef} className={styles.menuEntry}>
@@ -97,6 +115,7 @@ const MenuItem = ({
             className="menuItemButton"
             onClick={() => {
               toggleSubMenu(id);
+              console.log(id)
             }}
           >
             {`${name}`}
@@ -115,9 +134,6 @@ const MenuItem = ({
           }
         >
           <nav>
-            <h4>
-              {name}
-            </h4>
             {children.map(child =>
               <Link key={child.id} href={`${child.link}`}>
                 <a onClick={() => setIsOpen(null)}>
@@ -125,14 +141,14 @@ const MenuItem = ({
                 </a>
               </Link>
             )}
-            <Button
+            {!showFullMenu && <Button
               className="menuItemButton"
               onClick={() => {
                 toggleSubMenu(id);
               }}
             >
               BACK
-            </Button>
+            </Button>}
           </nav>
         </div>}
     </nav>

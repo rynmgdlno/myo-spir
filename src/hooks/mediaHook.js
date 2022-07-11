@@ -48,7 +48,7 @@ export const useWindowSize = () => {
       if (width < 415 && width < height) {
         setDevice("mobilePortrait");
       }
-      if (width > 1024) {
+      if (width > 1113) {
         setDevice("desktop");
       }
     },
@@ -57,3 +57,5 @@ export const useWindowSize = () => {
 
   return device;
 };
+
+export const mobileSizes = ["mobilePortrait", "mobileLandscape", "tabletPortrait", "tabletLandscape"];
