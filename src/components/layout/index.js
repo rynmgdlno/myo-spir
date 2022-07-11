@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     <div className={styles.layout}>
       <div className={styles.bgImage}/>
       <Header />
-      {children}
+      <div className={styles.wrapper}>{children}</div>
       <Footer />
     </div>
   );

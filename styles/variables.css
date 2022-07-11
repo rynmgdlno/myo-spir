@@ -1,6 +1,10 @@
 :root {
   /* colors */
   --transparent: rgba(0,0,0,0);
+  --backgroundDark: rgba(11, 21, 26, .8);
+  --fontLight: rgba(235, 240, 255, 1);
+  --fontMenu: rgb(11, 21, 26);
+  --highlight: rgba(151, 195, 213, 1);
 
   /* sizes */
   --menuItemHeight: 25px;

@@ -5,6 +5,10 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { getOrderedCollection, getSlugEntry } from "../../src/contentful";
 import { renderOptions } from "../../src/contentful/richText";
 
+import Facebook from "../../src/components/svg/facebook";
+import Instagram from "../../src/components/svg/instagram";
+import Twitter from "../../src/components/svg/twitter";
+
 import styles from "./blog.module.scss";
 
 // Nextjs fetching/routing:
@@ -33,7 +37,7 @@ export const getStaticProps = async context => {
 
 const Blog = props => {
   const data = props.data.items[0];
-  const { bodyText, date, description, image, title } = data.fields;
+  const { bodyText, date, image, title } = data.fields;
   const mainImage = {
     title: image.fields.title,
     alt: image.fields.description,
@@ -51,16 +55,33 @@ const Blog = props => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Image
-          src={mainImage.url}
-          height={mainImage.height}
-          width={mainImage.width}
-          alt={mainImage.alt}
-        />
-        <h3>
-          {title}
-        </h3>
-        {data && documentToReactComponents(bodyText, renderOptions)}
+        <section>
+          <div className={styles.image}>
+            <Image
+              src={mainImage.url}
+              height={mainImage.height}
+              width={mainImage.width}
+              alt={mainImage.alt}
+            />
+          </div>
+          <div className={styles.content}>
+            <div className={styles.share}>
+              <p>Share</p>
+              <Facebook className={styles.shareIcon} />
+              <Instagram className={styles.shareIcon} />
+              <Twitter className={styles.shareIcon} />
+            </div>
+            <div>
+              <p>
+                {date}
+              </p>
+              <h2>
+                {title}
+              </h2>
+              {data && documentToReactComponents(bodyText, renderOptions)}
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );

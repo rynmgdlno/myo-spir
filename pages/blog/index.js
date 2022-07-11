@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
 import { getOrderedCollection } from "../../src/contentful";
@@ -16,7 +17,6 @@ export const getStaticProps = async context => {
 
 const Blog = props => {
   const { posts } = props;
-  console.log(posts);
   return (
     <div className={styles.page}>
       <Head>
@@ -25,18 +25,57 @@ const Blog = props => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {posts.map(post =>
-          <div key={post.sys.id}>
-            <Link href={`/blog/${post.fields.slug}`}>
-              <a>
-                {post.fields.title}
-              </a>
-            </Link>
-          </div>
-        )}
+        <h1>Blog</h1>
+        <h3>Stay up to date.</h3>
+        <div className={styles.posts}>
+          {posts.map(post => <BlogCard key={post.id} data={post} />)}
+        </div>
       </main>
     </div>
   );
 };
 
 export default Blog;
+
+const BlogCard = ({ data, key }) => {
+  const {
+    date,
+    description,
+    image: {
+      fields: {
+        description: imageDescription,
+        file: { details: { image: { width, height } }, url: imageUrl }
+      }
+    },
+    slug,
+    title
+  } = data.fields;
+  return (
+    <article className={styles.blogCard}>
+      <Link key={key} href={`/blog/${slug}`}>
+        <a>
+          <div>
+            <Image
+              src={`https:${imageUrl}`}
+              alt={imageDescription}
+              layout="responsive"
+              width={width}
+              height={height}
+            />
+          </div>
+          <div>
+            <p>
+              {date}
+            </p>
+            <h2>
+              {title}
+            </h2>
+            <p>
+              {description}
+            </p>
+          </div>
+        </a>
+      </Link>
+    </article>
+  );
+};

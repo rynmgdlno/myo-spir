@@ -1,5 +1,118 @@
 .page {
   main {
     margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+
+    h1:first-of-type, h3:first-of-type {
+      color: var(--fontMenu);
+    }
+
+    article,
+    section {
+      width: 100%;
+      margin-bottom: 5rem;
+    }
+
+    article {
+      background-color: var(--backgroundDark);
+      border-radius: 10px;
+
+      p {
+        margin: 0;
+      }
+
+      p:first-of-type {
+        color: var(--highlight);
+        font-size: .8rem;
+      }
+
+      div:first-of-type {
+        overflow: hidden;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      div:last-of-type {
+        padding: 2rem;
+      }
+    }
+
+    section {
+      // background-color: var(--backgroundDark);
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      // .image {
+      //   border-radius: 10px;
+      //   overflow: hidden;
+      // }
+
+      .content {
+        width: 100%;
+        display: flex;
+        margin-top: 3rem;
+        justify-content: left;
+        justify-items: left;
+
+        .share {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: 50px;
+          border-right: 1px solid var(--highlight);
+
+          p {
+            color: var(--highlight);
+            font-size: .8rem;
+          }
+
+          .shareIcon {
+            fill: var(--fontLight);
+            width: 25px;
+            margin-bottom: 1rem;
+
+            &:first-of-type {
+              margin-top: 1rem;
+            }
+          }
+
+        }
+
+
+        div:last-of-type {
+          border-bottom-right-radius: 10px;
+          padding: 0 1rem 3rem;
+          background-color: var(--backgroundDark);
+
+          p:first-of-type {
+            color: var(--highlight);
+            font-size: .8rem;
+          }
+
+          p:last-of-type {
+            width: 90%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .page {
+
+    main {
+      .posts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .blogCard {
+          // margin-right: 1rem;
+          max-width: 48%;
+        }
+      }
+    }
   }
 }
