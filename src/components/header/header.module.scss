@@ -61,7 +61,9 @@
         max-height: 60vh;
         font-size: var(--menuItemFontSize);
 
+        
         nav {
+          
           margin-bottom: var(--menuItemHeight);
 
           a {
@@ -84,6 +86,10 @@
             justify-content: center;
             background-color: rgba(255, 255, 255, .9);
             transition: left .2s ease-in-out;
+
+            .backArrow {
+              fill: var(--backgroundDark);
+            }
 
             &.closed {
               left: 100%;

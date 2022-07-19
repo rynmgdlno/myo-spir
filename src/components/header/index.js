@@ -7,6 +7,7 @@ import { useWindowSize, mobileSizes } from "../../hooks/mediaHook";
 import Button from "../button";
 import { menuTree } from "../../generative/menuTree";
 
+import BackArrow from "../svg/back"
 import Twitter from "../svg/twitter";
 
 import styles from "./header.module.scss";
@@ -115,7 +116,6 @@ const MenuItem = ({
             className="menuItemButton"
             onClick={() => {
               toggleSubMenu(id);
-              console.log(id)
             }}
           >
             {`${name}`}
@@ -147,7 +147,7 @@ const MenuItem = ({
                 toggleSubMenu(id);
               }}
             >
-              BACK
+              <BackArrow className={styles.backArrow} />
             </Button>}
           </nav>
         </div>}
