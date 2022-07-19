@@ -12,6 +12,7 @@ export const renderOptions = {
         height={node.data.target.fields.file.details.image.height}
         width={node.data.target.fields.file.details.image.width}
         alt="temp"
+        layout="responsive"
         />
       )
     }

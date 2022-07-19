@@ -69,6 +69,7 @@ const Page = props => {
               height={mainImage.height}
               width={mainImage.width}
               alt={mainImage.alt}
+              layout="responsive"
             />
           </div>}
         <section>
