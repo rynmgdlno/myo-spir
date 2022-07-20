@@ -4,6 +4,10 @@
     display: flex;
     flex-direction: column;
 
+    .blogTitle {
+      margin-top: 2rem;
+    }
+
     article,
     section {
       width: 100%;
@@ -35,15 +39,10 @@
     }
 
     section {
-      // background-color: var(--backgroundDark);
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
       margin-top: 1rem;
-      // .image {
-      //   border-radius: 10px;
-      //   overflow: hidden;
-      // }
 
       .content {
         width: 100%;
@@ -59,7 +58,7 @@
           flex-direction: column;
           align-items: center;
           min-width: 50px;
-          border-right: 1px solid var(--highlight);
+          border-right: 5px solid var(--highlight);
 
           p {
             color: var(--highlight);
@@ -69,11 +68,7 @@
           .shareIcon {
             fill: var(--fontLight);
             width: 25px;
-            margin-bottom: 1rem;
-
-            &:first-of-type {
-              margin-top: 1rem;
-            }
+            margin: 1rem 0;
           }
 
         }
@@ -103,6 +98,11 @@
   .page {
 
     main {
+
+      .blogTitle {
+        margin-top: 5rem;
+      }
+      
       .posts {
         display: flex;
         flex-wrap: wrap;

@@ -4,8 +4,8 @@ import styles from './footer.module.scss'
 
 const Footer = () => {
   return (
-    <div>
-
+    <div className={styles.footer}>
+      <p>©2022 Myo-Spir.com. All Rights Reserved.</p>
     </div>
   );
 };

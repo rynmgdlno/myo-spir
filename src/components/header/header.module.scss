@@ -16,16 +16,23 @@
     height: 40px;
     // max-width: 1400px;
 
-    .logo {
-      fill: black;
-      width: 30px;
-      margin-left: .5rem;
-    }
+    .homeLink {
+      display: flex;
+      align-items: center;
+      // justify-content: space-between;
 
-    .title {
-      margin: 0;
-      font-size: 20px;
-      color: var(--fontMenu);
+      .logo {
+        fill: black;
+        width: 30px;
+        margin-left: .5rem;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 20px;
+        color: var(--fontMenu);
+        display: none;
+      }
     }
 
     .menuContainer {
@@ -61,20 +68,24 @@
         max-height: 60vh;
         font-size: var(--menuItemFontSize);
 
-        
+
         nav {
-          
+
           margin-bottom: var(--menuItemHeight);
 
           a {
             color: var(--fontMenu);
             font-weight: 400;
+
+            &:hover {
+              color: var(--highlight);
+            }
           }
         }
 
         .menuEntry {
           position: relative;
-          // border: 1px solid red;
+          // border: 1px solid var(--highlight);
 
           .subMenuContainer {
             position: fixed;
@@ -101,7 +112,11 @@
 
             a {
               margin-bottom: var(--menuItemHeight);
+
               // color: var(--fontMenu);
+              &:hover {
+                color: var(--highlight);
+              }
             }
 
             nav {
@@ -130,6 +145,7 @@
   top: 0;
   background-color: white;
   z-index: 5;
+  transition: height .2s ease-in-out;
 
   .headerWrapper {
     display: flex;
@@ -139,16 +155,33 @@
     height: 100%;
     background-color: white;
 
-    .logo {
-      fill: black;
-      width: 55px;
-      margin: 0;
-    }
+    .homeLink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    .title {
-      margin: 0rem 6rem 0rem 1rem;
-      font-size: 26px;
-      color: var(--fontMenu);
+      .logo {
+        transition: width .2s ease-in-out, transform .2s ease-in-out;
+        width: 55px;
+        margin: 0;
+      }
+
+      .title {
+        transition: font-size .2s ease-in-out, color .2s ease-in-out;
+        margin: 0rem 6rem 0rem 1rem;
+        font-size: 26px;
+        color: var(--fontMenu);
+      }
+
+      &:hover {
+        .logo {
+          transform: rotate(-5deg);
+        }
+
+        .title {
+          color: var(--highlight);
+        }
+      }
     }
 
     .menuContainer {
@@ -175,6 +208,11 @@
           a {
             color: var(--fontMenu);
             font-size: 16px;
+            transition: color .1s ease-in-out;
+
+            &:hover {
+              color: var(--highlight);
+            }
           }
         }
 
@@ -223,6 +261,10 @@
               margin: 1rem;
               color: var(--fontMenu);
               white-space: nowrap;
+
+              &:hover {
+                color: var(--highlight);
+              }
             }
 
             nav {
@@ -233,8 +275,37 @@
             }
           }
         }
+        .selector {
+          position: absolute;
+          left: 100px;
+          top: 63px;
+          height: 5px;
+          background-color: var(--highlight);
+          transform: skewX(-30deg);
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
   }
 
+  &.scrolled {
+    height: 70px;
+
+    .homeLink {
+      .logo {
+        width: 32px;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+    }
+    .menuContainer {
+      .menu {
+        .selector {
+          top: 47px;
+        }
+      }
+    }
+  }
 }

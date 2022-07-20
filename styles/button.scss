@@ -8,6 +8,11 @@
   padding: 0;
   margin: 0;
   color: var(--fontMenu);
+  transition: color .1s ease-in-out;
+
+  &:hover {
+    color: var(--highlight);
+  }
 }
 
 @media screen and (min-width: 1113px) {

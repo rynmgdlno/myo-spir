@@ -25,7 +25,7 @@ const Blog = props => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Blog</h1>
+        <h1 className={styles.blogTitle}>Blog</h1>
         <h3>Stay up to date.</h3>
         <div className={styles.posts}>
           {posts.map(post => <BlogCard key={post.id} data={post} />)}
