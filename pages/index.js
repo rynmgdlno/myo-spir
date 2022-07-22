@@ -5,6 +5,8 @@ import { getOrderedCollection } from "../src/contentful";
 
 import Header from "../src/components/header";
 
+import Logo from '../src/components/svg/logo'
+
 import styles from "../styles/Home.module.scss";
 
 export const getStaticProps = async () => {

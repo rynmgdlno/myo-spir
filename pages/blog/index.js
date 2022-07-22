@@ -51,8 +51,8 @@ const BlogCard = ({ data, key }) => {
     title
   } = data.fields;
   return (
-    <article className={styles.blogCard}>
-      <Link key={key} href={`/blog/${slug}`}>
+    <article key={key} className={styles.blogCard}>
+      <Link href={`/blog/${slug}`}>
         <a>
           <div>
             <Image
