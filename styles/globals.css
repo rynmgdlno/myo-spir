@@ -4,6 +4,10 @@ body {
   margin: 0;
 }
 
+html {
+  background-color: var(--backgroundDarkOpaque);
+}
+
 a {
   color: inherit;
   text-decoration: none;
