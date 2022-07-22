@@ -14,6 +14,7 @@ import styles from "./header.module.scss";
 
 const Header = () => {
   const [currentMenu, setCurrentMenu] = useState(null)
+  const device = useWindowSize();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const showFullMenu = !mobileSizes.includes(useWindowSize());
@@ -51,17 +52,17 @@ const Header = () => {
           <Hamburger
             toggled={isOpen}
             toggle={setIsOpen}
-            color="rgba(11, 21, 26, 1)"
+            color="#000"
             size={28}
           />}
         <Menu
-          currentMenu={currentMenu}
-          isOpen={isOpen}
           menuTree={menuTree}
-          scrolled={scrolled}
-          setCurrentMenu={setCurrentMenu}
+          isOpen={isOpen}
           setIsOpen={setIsOpen}
           showFullMenu={showFullMenu}
+          scrolled={scrolled}
+          currentMenu={currentMenu}
+          setCurrentMenu={setCurrentMenu}
         />
       </div>
     </div>
