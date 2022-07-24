@@ -37,6 +37,17 @@ button {
   }
 }
 
+.submitDisabled {
+  background-color: rgb(73, 78, 82);
+  color: var(--backgroundDarkOpaque);
+  border: 1px solid var(--backgroundDarkOpaque);
+  font-size: var(--buttonFontSize);
+  padding: .5rem 1.5rem;
+  border-radius: 20px;
+  margin: 1rem;
+  cursor: default;
+}
+
 @media screen and (min-width: 1113px) {
   .menuItemButton {
     font-weight: 200;

@@ -36,7 +36,7 @@ export const getStaticProps = async context => {
 };
 
 const Page = props => {
-  const { AppointmentForm, ContactForm, ReferralForm } = Forms;
+  const { AppointmentForm, ContactForm } = Forms;
   const data = props.data.items[0];
   const { pageMainImage, title, pageMainBodyText } = data.fields;
   const mainImage = pageMainImage
@@ -71,8 +71,14 @@ const Page = props => {
           </div>}
         <section>
           {/* {data && documentToReactComponents(pageMainBodyText, renderOptions)} */}
-          {title.toLowerCase() === "contact" && <ContactForm />}
-          {title.toLowerCase() === "referrals" && <ReferralForm />}
+          {title.toLowerCase() === "contact" && <ContactForm 
+            message={`hello`}
+            contactType="CONTACT"
+          />}
+          {title.toLowerCase() === "referrals" && <ContactForm 
+            message={`referrals`}
+            contactType={"REFERRAL"}
+          />}
           {title.toLowerCase() === "book an appointment" && <AppointmentForm />}
         </section>
       </main>
