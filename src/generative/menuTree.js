@@ -3,18 +3,18 @@ export const menuTree = [
 		"name": "Tiffany Washburn",
 		"id": 0,
 		"link": null,
-		"children": [
+		"subMenu": [
 			{
 				"name": "About Me",
 				"id": 0,
 				"link": "/about-me",
-				"children": null
+				"subMenu": null
 			},
 			{
 				"name": "My Memberships",
 				"id": 1,
 				"link": "/my-memberships",
-				"children": null
+				"subMenu": null
 			}
 		]
 	},
@@ -22,48 +22,48 @@ export const menuTree = [
 		"name": "Blog",
 		"id": 1,
 		"link": "/blog",
-		"children": null
+		"subMenu": null
 	},
 	{
 		"name": "What is Myofunctional Therapy?",
 		"id": 2,
 		"link": "/what-is-myofunctional-therapy",
-		"children": null
+		"subMenu": null
 	},
 	{
 		"name": "How Does it Work?",
 		"id": 3,
 		"link": "/how-does-it-work",
-		"children": null
+		"subMenu": null
 	},
 	{
 		"name": "Information",
 		"id": 4,
 		"link": null,
-		"children": [
+		"subMenu": [
 			{
 				"name": "Sleep Disordered Breathing",
 				"id": 0,
 				"link": "/sleep-disordered-breathing",
-				"children": null
+				"subMenu": null
 			},
 			{
 				"name": "TMJ and Facial Pain",
 				"id": 1,
 				"link": "/tmj-and-facial-pain",
-				"children": null
+				"subMenu": null
 			},
 			{
 				"name": "Speech and Tongue Thrust",
 				"id": 2,
 				"link": "/speech-and-tongue-thrust",
-				"children": null
+				"subMenu": null
 			},
 			{
 				"name": "Nasal Breathing",
 				"id": 3,
 				"link": "/nasal-breathing",
-				"children": null
+				"subMenu": null
 			}
 		]
 	},
@@ -71,18 +71,18 @@ export const menuTree = [
 		"name": "Contact",
 		"id": 5,
 		"link": "/contact",
-		"children": null
+		"subMenu": null
 	},
 	{
 		"name": "Refer a Patient",
 		"id": 6,
 		"link": "/referrals",
-		"children": null
+		"subMenu": null
 	},
 	{
 		"name": "Book an Appointment",
 		"id": 7,
 		"link": "/book-an-appointment",
-		"children": null
+		"subMenu": null
 	}
 ]
