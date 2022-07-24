@@ -2,55 +2,36 @@ import { useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 
 import Button from "../button";
-
 import BackArrow from "../svg/back";
 
 import styles from "./header.module.scss";
 
 const MenuItem = ({
-  activeIndex,
-  currentMenu,
-  id,
-  isOpen,
-  setIsOpen,
-  link,
-  name,
-  children,
+  entry,
+  handleHighlight,
+  handleMenu,
+  highlightState,
+  menuState,
   showFullMenu,
-  toggleSubMenu,
-  scrolled,
-  setActiveIndex,
-  setCurrentMenu,
-  setHoverActive,
-  setDefaultPosition,
-  setDefaultWidth,
-  setPosition,
-  setWidth
+  toggleSubMenu
 }) => {
   const dropDownRef = useRef(null);
-  const isActive = id !== activeIndex ? false : true;
-  // todo: extract useEffects to custom hooks?:
-  // setting width/position for menu selector highlight:
-  // const el = dropDownRef.current;
+  const { id, name, link, subMenu } = entry;
+  const { activeSubMenu } = highlightState;
+  const { currentPage, isOpen } = menuState;
+
+  // setting menu selector highlight coordinates:
+  const el = dropDownRef.current;
   const handleMouse = useCallback(
     () => {
-      const rect = dropDownRef.current.getBoundingClientRect();
-      setWidth(dropDownRef.current.offsetWidth);
-      setPosition(rect.left);
+      const rect = el.getBoundingClientRect();
+      handleHighlight("width", el.offsetWidth);
+      handleHighlight("position", rect.left);
     },
-    [dropDownRef, setPosition, setWidth]
+    [el, handleHighlight]
   );
-
-  useEffect(
-    () => {
-      if (currentMenu === id) {
-        setDefaultPosition(dropDownRef.current.getBoundingClientRect().left);
-        setDefaultWidth(dropDownRef.current.offsetWidth);
-      }
-    },
-    [currentMenu, id, setDefaultPosition, setDefaultWidth]
-  );
-
+  
+  // setting coords on hover
   useEffect(
     () => {
       const el = dropDownRef.current;
@@ -59,33 +40,31 @@ const MenuItem = ({
         el.removeEventListener("mouseover", handleMouse);
       };
     },
-    [dropDownRef, handleMouse, id]
+    [dropDownRef, handleMouse, id, el]
   );
 
-  // val selector highlight position on scroll:
-  const val = 3.2;
+  // setting "default" coords to stick highlight to current page's button
   useEffect(
     () => {
-      setPosition(prevState => (scrolled ? prevState - val : prevState + val));
-      setDefaultPosition(
-        prevState =>
-          scrolled ? prevState - val : prevState + val
-      );
+      if (currentPage === id) {
+        handleHighlight("defPosition", el.getBoundingClientRect().left);
+        handleHighlight("defWidth", el.offsetWidth);
+      }
     },
-    [setPosition, setDefaultPosition, scrolled]
+    [currentPage, id, handleHighlight, el]
   );
 
   // closes submenu on hamburger click (mobile only)
   useEffect(
     () => {
-      if (!showFullMenu && !isOpen && activeIndex !== null) {
+      if (!showFullMenu && !isOpen && activeSubMenu !== null) {
         toggleSubMenu(id);
       }
     },
-    [showFullMenu, isOpen, activeIndex, toggleSubMenu, id]
+    [showFullMenu, isOpen, activeSubMenu, toggleSubMenu, id]
   );
 
-  // listener to close submenu on outside click:
+  // closes submenu on outside click:
   useEffect(
     () => {
       const outsideMenu = e => {
@@ -93,27 +72,27 @@ const MenuItem = ({
           dropDownRef.current !== null &&
           !dropDownRef.current.contains(e.target)
         ) {
-          setActiveIndex(null);
+          handleHighlight("activeSubMenu", null);
         }
       };
-      if (isActive) {
+      if (id === activeSubMenu) {
         window.addEventListener("click", outsideMenu);
       }
       return () => {
         window.removeEventListener("click", outsideMenu);
       };
     },
-    [isActive, setActiveIndex]
+    [activeSubMenu, id, handleHighlight]
   );
 
   return (
     <nav
       ref={dropDownRef}
       className={styles.menuEntry}
-      onMouseEnter={() => setHoverActive(true)}
-      onMouseLeave={() => setHoverActive(false)}
+      onMouseEnter={() => handleHighlight("hoverActive", true)}
+      onMouseLeave={() => handleHighlight("hoverActive", false)}
     >
-      {children
+      {subMenu !== null 
         ? <Button
             className="menuItemButton"
             onClick={() => {
@@ -125,29 +104,31 @@ const MenuItem = ({
         : <Link href={`${link}`}>
             <a
               onClick={() => {
-                setIsOpen(null);
-                setCurrentMenu(id);
+                handleMenu("isOpen", null);
+                handleMenu("currentPage", id);
               }}
             >
               {name}
             </a>
           </Link>}
-      {children &&
+      {subMenu &&
         <div
           className={
-            id !== activeIndex
+            id !== activeSubMenu
               ? `${styles.subMenuContainer} ${styles.closed}`
               : `${styles.subMenuContainer} ${styles.open}`
           }
         >
           <nav>
-            {children.map(child =>
+            {subMenu.map(child =>
               <Link key={child.id} href={`${child.link}`}>
-                <a onClick={() => {
-                  setIsOpen(null);
-                  setCurrentMenu(id);
-                  toggleSubMenu(id);
-                }}>
+                <a
+                  onClick={() => {
+                    handleMenu("isOpen", null);
+                    handleMenu("currentPage", id);
+                    toggleSubMenu(id);
+                  }}
+                >
                   {child.name}
                 </a>
               </Link>

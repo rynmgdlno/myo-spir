@@ -1,56 +1,75 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useCallback, useState } from "react";
+
+import { useScroll } from "../../hooks/useScroll";
+import { menuTree } from "../../generative/menuTree";
 
 import MenuItem from "./menuItem";
 
 import styles from "./header.module.scss";
 
-const Menu = ({
-  isOpen,
-  setIsOpen,
-  menuTree,
-  showFullMenu,
-  scrolled,
-  currentMenu,
-  setCurrentMenu
-}) => {
-  const router = useRouter();
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [hoverActive, setHoverActive] = useState(false);
-  const [defaultPosition, setDefaultPosition] = useState(null);
-  const [defaultWidth, setDefaultWidth] = useState(null);
-  const [menuToggle, setMenuToggle] = useState(null);
-  const [position, setPosition] = useState(null);
-  const [width, setWidth] = useState(null);
-  const menuSlide = !isOpen ? `${styles.closed}` : `${styles.open}`;
+const Menu = ({ menuState, handleMenu, showFullMenu }) => {
+  const isScrolled = useScroll(25);
+  const [highlightState, setHighlightState] = useState({
+    activeSubMenu: null,
+    defPosition: null,
+    defWidth: null,
+    hoverActive: null,
+    position: null,
+    width: null
+  });
 
+  const {
+    activeSubMenu,
+    defPosition,
+    defWidth,
+    hoverActive,
+    position,
+    width
+  } = highlightState;
+
+  const { currentPage, isOpen } = menuState;
+  const menuSlide = !isOpen ? `${styles.closed}` : `${styles.open}`;
+  const newDefPosition = !isScrolled ? defPosition : defPosition - 25;
+  const subMenuSlide = activeSubMenu !== null && `${styles.subMenuSlide}`;
   const selectorClass =
-    currentMenu === null & !hoverActive 
+    // on homepage and not hovering:
+    (currentPage === null) & !hoverActive
       ? {
           left: `${position}`,
           width: `${width}px`,
-          opacity: 0,
+          opacity: 0
         }
-      : activeIndex !== null || hoverActive
+      : // submenu open || hovering:
+        activeSubMenu !== null || hoverActive
         ? {
             left: `${position}px`,
             width: `${width}px`,
             opacity: 1
           }
-        : {
-            left: `${defaultPosition}px`,
-            width: `${defaultWidth}px`,
-            opacity: 0.4,
+        : // not on homepage and not hovering:
+          {
+            left: `${newDefPosition}px`,
+            width: `${defWidth}px`,
+            opacity: 0.4
           };
 
-  const subMenuSlide = activeIndex !== null && `${styles.subMenuSlide}`;
+  // state setter:
+  const handleHighlight = useCallback((state, val) => {
+    setHighlightState(prevState => ({
+      ...prevState,
+      [state]: val
+    }));
+  }, []);
 
   // sub menu handler:
   const toggleSubMenu = id => {
-    if (id === activeIndex) {
-      setActiveIndex(null);
+    if (id === activeSubMenu) {
+      // if clicked on the button for the currently open menu,
+      // close the menu
+      handleHighlight("activeSubMenu", null);
+      // else open the designated menu
     } else {
-      setActiveIndex(id);
+      handleHighlight("activeSubMenu", id);
     }
   };
 
@@ -59,32 +78,20 @@ const Menu = ({
       <div className={styles.menu}>
         {menuTree.map(entry =>
           <MenuItem
-            activeIndex={activeIndex}
-            currentMenu={currentMenu}
-            setCurrentMenu={setCurrentMenu}
-            key={entry.id}
-            setIsOpen={setIsOpen}
-            id={entry.id}
+            entry={entry}
+            handleHighlight={handleHighlight}
+            handleMenu={handleMenu}
+            highlightState={highlightState}
             isOpen={isOpen}
-            link={entry.link}
-            name={entry.name}
-            menuToggle={menuToggle}
-            setActiveIndex={setActiveIndex}
-            setMenuToggle={setMenuToggle}
+            key={entry.id}
+            menuState={menuState}
             showFullMenu={showFullMenu}
             toggleSubMenu={toggleSubMenu}
-            setWidth={setWidth}
-            setPosition={setPosition}
-            scrolled={scrolled}
-            setHoverActive={setHoverActive}
-            setDefaultPosition={setDefaultPosition}
-            setDefaultWidth={setDefaultWidth}
-          >
-            {entry.children}
-          </MenuItem>
+          />
         )}
       </div>
-      {showFullMenu && <div className={`${styles.selector}`} style={selectorClass} />}
+      {showFullMenu &&
+        <div className={`${styles.selector}`} style={selectorClass} />}
     </div>
   );
 };
