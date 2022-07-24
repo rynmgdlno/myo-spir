@@ -17,8 +17,12 @@ a {
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, a, p, li {
+h1, h2, h3, h4, h5, h6, a, p, li, label {
   color: var(--fontLight);
+}
+
+input, textarea {
+  color: var(--formText);
 }
 
 h1 {
@@ -57,7 +61,11 @@ h2, h4, h6 {
   font-weight: 300;
 }
 
-a, p, li {
+a, p, li, label {
   font-family: 'Open Sans', sans-serif;
   font-weight: 200;
+}
+
+label {
+  font-size: 12px;
 }

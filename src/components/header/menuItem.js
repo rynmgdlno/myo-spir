@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 
-import Button from "../button";
+import { Button } from "../button";
 import BackArrow from "../svg/back";
 
 import styles from "./header.module.scss";
@@ -30,7 +30,7 @@ const MenuItem = ({
     },
     [el, handleHighlight]
   );
-  
+
   // setting coords on hover
   useEffect(
     () => {
@@ -92,7 +92,7 @@ const MenuItem = ({
       onMouseEnter={() => handleHighlight("hoverActive", true)}
       onMouseLeave={() => handleHighlight("hoverActive", false)}
     >
-      {subMenu !== null 
+      {subMenu !== null
         ? <Button
             className="menuItemButton"
             onClick={() => {

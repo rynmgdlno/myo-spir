@@ -1,8 +1,11 @@
-.menuItemButton {
+button {
   appearance: none;
-  cursor: pointer;
-  border: none;
   background-color: var(--transparent);
+  border: none;
+  cursor: pointer;
+}
+
+.menuItemButton {
   height: var(--menuItemHeight);
   font-size: var(--menuItemFontSize);
   padding: 0;
@@ -15,8 +18,24 @@
   }
 }
 
+.submitButton {
+  background-color: rgba(179, 205, 221, 1);
+  color: var(--backgroundDarkOpaque);
+  font-size: var(--buttonFontSize);
+  padding: .5rem 1.5rem;
+  border-radius: 20px;
+  margin: 1rem;
+
+  // &:hover {
+
+  // }
+}
+
 @media screen and (min-width: 1113px) {
   .menuItemButton {
     font-weight: 200;
   }
 }
+
+// 179, 205, 221
+
