@@ -3,11 +3,12 @@ import * as EmailValidate from "email-validator";
 
 import { getMessage } from "../../static/messages";
 
+import { Spinner } from "../svg/spinner";
 import { Button } from "../button";
 import { Input, TextArea } from "../formInput";
 
 export const ContactForm = props => {
-  const enterRef = useRef()
+  const enterRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,10 +21,10 @@ export const ContactForm = props => {
     clicked: false,
     confirmation: false,
     error: null,
-    fixForm: false,
+    isLoading: false,
     submitDisabled: true
   });
-  const { clicked, confirmation, error, fixForm, submitDisabled } = formState;
+  const { clicked, confirmation, error, isLoading, submitDisabled } = formState;
 
   const [formErrors, setFormErrors] = useState({
     name: true,
@@ -59,14 +60,21 @@ export const ContactForm = props => {
     handleForm("clicked", true);
     if (!submitDisabled) {
       console.log("trying submit");
+      handleForm("isLoading", true);
       try {
+        const messageBody = {
+          name,
+          email,
+          formatSubject: `CONTACT FORM: ${subject}`,
+          message
+        };
         fetch("api/mail", {
           method: "POST",
           headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(messageBody)
         }).then(res => {
           console.log(res);
           if (res.status === 200) {
@@ -77,6 +85,10 @@ export const ContactForm = props => {
               subject: "",
               message: ""
             });
+            handleForm("isLoading", false);
+            handleForm("clicked", false);
+            // todo send auto reply mail
+            handleForm("confirmation", true);
           }
         });
       } catch (err) {
@@ -119,12 +131,7 @@ export const ContactForm = props => {
   // submit disabled handling:
   useEffect(
     () => {
-      if (
-        name &&
-        EmailValidate.validate(email) &&
-        subject &&
-        message.length
-      ) {
+      if (name && EmailValidate.validate(email) && subject && message.length) {
         handleForm("submitDisabled", false);
       } else {
         handleForm("submitDisabled", true);
@@ -134,7 +141,6 @@ export const ContactForm = props => {
   );
 
   const submitClass = !submitDisabled ? `submitButton` : `submitDisabled`;
-
 
   // Formatting input error message:
   let errorFields = Object.entries(formErrors).filter(
@@ -156,16 +162,17 @@ export const ContactForm = props => {
 
   const formError = `There is an error in the form. Please check the ${errorFields} field(s) and try again.`;
 
-
   // setting input error to state error:
-  useEffect(() => {
-    if (errorCount > 0) {
-      handleForm("error", formError)
-    } else {
-      handleForm("error", null)
-    }
-  }, [errorCount, formError])
-
+  useEffect(
+    () => {
+      if (errorCount > 0) {
+        handleForm("error", formError);
+      } else {
+        handleForm("error", null);
+      }
+    },
+    [errorCount, formError]
+  );
 
   // enter key listener:
   useEffect(() => {
@@ -175,63 +182,89 @@ export const ContactForm = props => {
       }
     };
     enterRef.current.addEventListener("keydown", handleEnter);
-    let refHolder = enterRef
+    let refHolder = enterRef;
     return () => {
-      refHolder.current.removeEventListener("keydown", handleEnter)
-    }
-  }, [])
+      refHolder.current.removeEventListener("keydown", handleEnter);
+    };
+  }, []);
+
+  // set timeout for resetting confirmation message:
+  useEffect(
+    () => {
+      if (confirmation) {
+        const timer = setTimeout(() => {
+          handleForm("confirmation", false);
+        }, 5000);
+        return () => {
+          clearTimeout(timer);
+        };
+      }
+    },
+    [confirmation]
+  );
 
   return (
     <div className="formContainer">
-      <h4
-      >{`Hey There Pard'ner! Got some questions? Don't hesitate to reach out!`}</h4>
-      <form onSubmit={handleSubmit} ref={enterRef}>
-        <div className="dualField">
-          <Input
-            checkError={!name}
-            error={clicked && !name}
-            label="Your Name:"
-            onChange={handleInput}
-            name="name"
-            value={name}
-          />
-          <Input
-            autoComplete="email"
-            checkError={!EmailValidate.validate(email)}
-            error={clicked && !EmailValidate.validate(email)}
-            label="Email Address:"
-            onChange={handleInput}
-            name="email"
-            value={email}
-          />
-        </div>
-        <div className="singleField">
-          <Input
-            checkError={!subject}
-            error={clicked && !subject}
-            label="Subject:"
-            onChange={handleInput}
-            name="subject"
-            value={subject}
-          />
-        </div>
-        <TextArea
-          checkError={!message}
-          error={clicked && !message}
-          label="Message:"
-          onChange={handleInput}
-          name="message"
-          value={message}
-        />
-        <div className="buttonContainer">
-          <Button className={submitClass} type="submit">
-            Submit
-          </Button>
-        </div>
-        {clicked && error && <p>
-          {formError}
-        </p>}
-      </form>
+      {confirmation
+        ? <div>
+            <h3>Thank you for your interest!</h3>
+            <p>{`I'll be getting back to you as soon as possible.`}</p>
+          </div>
+        : <div>
+            <h4
+            >{`Hey There Pard'ner! Got some questions? Don't hesitate to reach out!`}</h4>
+            <form onSubmit={handleSubmit} ref={enterRef}>
+              <div className="dualField">
+                <Input
+                  checkError={!name}
+                  error={clicked && !name}
+                  label="Your Name:"
+                  onChange={handleInput}
+                  name="name"
+                  value={name}
+                />
+                <Input
+                  autoComplete="email"
+                  checkError={!EmailValidate.validate(email)}
+                  error={clicked && !EmailValidate.validate(email)}
+                  label="Email Address:"
+                  onChange={handleInput}
+                  name="email"
+                  value={email}
+                />
+              </div>
+              <div className="singleField">
+                <Input
+                  checkError={!subject}
+                  error={clicked && !subject}
+                  label="Subject:"
+                  onChange={handleInput}
+                  name="subject"
+                  value={subject}
+                />
+              </div>
+              <TextArea
+                checkError={!message}
+                error={clicked && !message}
+                label="Message:"
+                onChange={handleInput}
+                name="message"
+                value={message}
+              />
+              <div className="buttonContainer">
+                {isLoading
+                  ? <Spinner className="spinnerContainerComponent"/>
+                  : <Button className={submitClass} type="submit">
+                      Submit
+                    </Button>}
+              </div>
+              {clicked &&
+                error &&
+                <p>
+                  {formError}
+                </p>}
+            </form>
+          </div>}
     </div>
   );
 };

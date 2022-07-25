@@ -1,6 +1,8 @@
 const mail = (req, res) => {
   const email_user = process.env.EMAIL_USER
   const email_pass = process.env.EMAIL_PASS
+
+  console.log(email_user, email_pass)
   
   let nodemailer = require('nodemailer')
   const transporter = nodemailer.createTransport({
@@ -16,10 +18,12 @@ const mail = (req, res) => {
   const messageData = {
     from: email_user,
     to: 'ryannmagdaleno@icloud.com',
-    subject: `Message from ${req.body.firstName} ${req.body.lastName}`,
+    subject: `New Message from ${req.body.name} RE: ${req.body.formatSubject}`,
     text: `${req.body.message}`,
     html: `<div>${req.body.message}</div>`
   }
+
+  console.log(messageData)
 
   transporter.sendMail(messageData, function (err, info) {
     if (err) {
