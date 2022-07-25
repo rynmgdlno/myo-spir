@@ -70,14 +70,14 @@ const Page = props => {
             />
           </div>}
         <section>
-          {/* {data && documentToReactComponents(pageMainBodyText, renderOptions)} */}
+          {data && documentToReactComponents(pageMainBodyText, renderOptions)}
           {title.toLowerCase() === "contact" && <ContactForm 
             message={`hello`}
-            contactType="CONTACT"
+            formType="CONTACT FORM"
           />}
           {title.toLowerCase() === "referrals" && <ContactForm 
             message={`referrals`}
-            contactType={"REFERRAL"}
+            formType={"REFERRAL"}
           />}
           {title.toLowerCase() === "book an appointment" && <AppointmentForm />}
         </section>

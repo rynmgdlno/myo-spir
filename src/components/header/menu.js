@@ -29,13 +29,14 @@ const Menu = ({ menuState, handleMenu, showFullMenu }) => {
 
   const { currentPage, isOpen } = menuState;
   const menuSlide = !isOpen ? `${styles.closed}` : `${styles.open}`;
-  const newDefPosition = !isScrolled ? defPosition : defPosition - 25;
+  // * code for if menu moves on x axis during scroll:
+  // const newDefPosition = !isScrolled ? defPosition : defPosition - 25;
   const subMenuSlide = activeSubMenu !== null && `${styles.subMenuSlide}`;
   const selectorClass =
     // on homepage and not hovering:
     (currentPage === null) & !hoverActive
       ? {
-          left: `${position}`,
+          left: `${position}px`,
           width: `${width}px`,
           opacity: 0
         }
@@ -48,11 +49,12 @@ const Menu = ({ menuState, handleMenu, showFullMenu }) => {
           }
         : // not on homepage and not hovering:
           {
-            left: `${newDefPosition}px`,
+            left: `${defPosition}px`,
             width: `${defWidth}px`,
             opacity: 0.4
           };
 
+          console.log(selectorClass)
   // state setter:
   const handleHighlight = useCallback((state, val) => {
     setHighlightState(prevState => ({

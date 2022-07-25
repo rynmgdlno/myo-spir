@@ -1,13 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import { getOrderedCollection, getSlugEntry } from "../../src/contentful";
 import { renderOptions } from "../../src/contentful/richText";
 
 import Facebook from "../../src/components/svg/facebook";
-import Instagram from "../../src/components/svg/instagram";
 import LinkedIn from "../../src/components/svg/linkedin";
 import Twitter from "../../src/components/svg/twitter";
 
@@ -37,6 +35,7 @@ export const getStaticProps = async context => {
   };
 };
 
+
 const Blog = props => {
   const data = props.data.items[0];
   const { bodyText, date, description, image, slug, title } = data.fields;
@@ -48,7 +47,8 @@ const Blog = props => {
     height: image.fields.file.details.image.height
   };
   const shareLink = `https://myo-spir.com/${slug}`;
-  const testLink = `https://ilysiavr.com/careers`;
+  // const firstChar = documentToReactComponents(bodyText, renderOptions).filter(el => el.type === "p")[0].props.children[0].split(2)
+  // console.log(firstChar)
   return (
     <div className={styles.page}>
       <Head>
@@ -89,7 +89,7 @@ const Blog = props => {
               layout="responsive"
             />
           </div>
-          <div className={styles.content}>
+          <div className={styles.articleHeader}>
             <div className={styles.share}>
               <p>Share</p>
               <a
@@ -114,18 +114,21 @@ const Blog = props => {
                 <LinkedIn className={styles.shareIcon} />
               </a>
             </div>
-            <div>
-              <p>
-                {date}
-              </p>
+            <div className={styles.articleInfo}>
               <h1>
                 {title}
               </h1>
               <h2>
                 {description}
               </h2>
-              {data && documentToReactComponents(bodyText, renderOptions)}
+              <p>
+                {date}
+              </p>
+              <hr />
             </div>
+          </div>
+          <div className={styles.body}>
+            {data && documentToReactComponents(bodyText, renderOptions)}
           </div>
         </section>
       </main>

@@ -28,7 +28,7 @@ const Blog = props => {
         <h1 className={styles.blogTitle}>Blog</h1>
         <h3>Stay up to date.</h3>
         <div className={styles.posts}>
-          {posts.map(post => <BlogCard key={post.id} data={post} />)}
+          {posts.map(post => <BlogCard key={post.sys.id} data={post} />)}
         </div>
       </main>
     </div>
@@ -37,7 +37,7 @@ const Blog = props => {
 
 export default Blog;
 
-const BlogCard = ({ data, key }) => {
+const BlogCard = ({ data }) => {
   const {
     date,
     description,
@@ -51,7 +51,7 @@ const BlogCard = ({ data, key }) => {
     title
   } = data.fields;
   return (
-    <article key={key} className={styles.blogCard}>
+    <article className={styles.blogCard}>
       <Link href={`/blog/${slug}`}>
         <a>
           <div>

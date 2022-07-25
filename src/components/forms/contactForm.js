@@ -65,7 +65,7 @@ export const ContactForm = props => {
         const messageBody = {
           name,
           email,
-          formatSubject: `CONTACT FORM: ${subject}`,
+          formatSubject: `{props.formType}: ${subject}`,
           message
         };
         fetch("api/mail", {
@@ -88,6 +88,7 @@ export const ContactForm = props => {
             handleForm("isLoading", false);
             handleForm("clicked", false);
             // todo send auto reply mail
+            // todo: props.message
             handleForm("confirmation", true);
           }
         });
@@ -211,8 +212,6 @@ export const ContactForm = props => {
             <p>{`I'll be getting back to you as soon as possible.`}</p>
           </div>
         : <div>
-            <h4
-            >{`Hey There Pard'ner! Got some questions? Don't hesitate to reach out!`}</h4>
             <form onSubmit={handleSubmit} ref={enterRef}>
               <div className="dualField">
                 <Input

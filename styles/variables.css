@@ -1,6 +1,7 @@
 :root {
   /* colors */
   --transparent: rgba(0,0,0,0);
+  --backgroundBlack: rgb(5, 9, 12);
   --backgroundDark: rgba(11, 21, 26, .9);
   --backgroundDarkOpaque: rgba(11, 21, 26, 1);
   --backgroundMediumOpaque: rgb(6, 15, 20);

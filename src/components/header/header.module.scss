@@ -161,8 +161,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1400px;
-      min-width: 1000px;
+      flex-grow: 1;
+      max-width: 800px;
       height: 100%;
 
       .homeLink {
@@ -310,19 +310,25 @@
   &.scrolled {
     height: 70px;
 
-    .homeLink {
-      .logo {
-        width: 150px;
-      }
+    .headerWrapper {
 
-      .title {
-        font-size: 20px;
-      }
-    }
+      .navWrapper {
 
-    .menuContainer {
-      .selector {
-        top: 47px;
+        .homeLink {
+          .logo {
+            width: 150px;
+          }
+    
+          .title {
+            font-size: 20px;
+          }
+        }
+    
+        .menuContainer {
+          .selector {
+            top: 47px;
+          }
+        }
       }
     }
   }

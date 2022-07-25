@@ -1,6 +1,6 @@
 .page {
   main {
-    margin-top: 4rem;
+    margin-top: 3.1rem;
     display: flex;
     flex-direction: column;
 
@@ -11,7 +11,6 @@
     article,
     section {
       width: 100%;
-      margin-bottom: 5rem;
     }
 
     article {
@@ -40,25 +39,26 @@
 
     section {
       width: 100%;
-      border-radius: 10px;
       overflow: hidden;
-      margin-top: 1rem;
 
-      .content {
+      .articleHeader {
         width: 100%;
         display: flex;
-        margin-top: 2rem;
+        flex-direction: column-reverse;
         justify-content: left;
         justify-items: left;
-        border-bottom-right-radius: 10px;
         overflow: hidden;
+        background-color: var(--backgroundDark);
 
         .share {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           align-items: center;
-          min-width: 50px;
-          border-right: 5px solid var(--highlight);
+          height: 50px;
+          justify-content: space-around;
+          border-top: 1px solid var(--highlight);
+          border-bottom: 1px solid var(--highlight);
+          background: var(--backgroundBlack);
 
           p {
             color: var(--highlight);
@@ -68,33 +68,52 @@
           .shareIcon {
             fill: var(--fontLight);
             width: 25px;
-            margin: 1rem 0;
-          }
+            margin: .5rem 0;
 
+            &:hover {
+              fill: var(--highlight);
+            }
+          }
         }
 
+        .articleInfo {
+          margin: 1rem;
+          margin-bottom: 0;
 
-        div:last-of-type {
-          border-bottom-right-radius: 10px;
-          padding: 0 1rem 3rem;
-          background-color: var(--backgroundDark);
-          overflow: hidden;
-
-          p:first-of-type {
+          p {
             color: var(--highlight);
             font-size: .8rem;
+            margin-top: 0;
           }
 
-          p:last-of-type {
-            width: 90%;
+          h1 {
+            margin-top: .5rem;
+          }
+
+          h2 {
+            margin-bottom: 1rem;
+          }
+
+          hr {
+            display: none;
           }
         }
+      }
+    }
+
+    .body {
+      background-color: var(--backgroundDark);
+      padding: 1rem;
+
+      p {
+        margin-bottom: 1rem;
       }
     }
   }
 }
 
-@media screen and (min-width: 1113px) {
+
+@media screen and (min-width: 768px) {
   .page {
 
     main {
@@ -102,7 +121,7 @@
       .blogTitle {
         margin-top: 5rem;
       }
-      
+
       .posts {
         display: flex;
         flex-wrap: wrap;
@@ -116,7 +135,210 @@
 
       section {
         margin-top: 4rem;
+        // border: 1px solid yellow;
+
+        .articleHeader {
+          flex-direction: row;
+          justify-content: flex-end;
+          margin-top: .5rem;
+
+          .share {
+            flex-direction: column;
+            border-top: none;
+            width: 50px;
+            min-height: 245px;
+            border-bottom: none;
+            border-right: 5px solid var(--highlight);
+            padding-bottom: -10px;
+
+            .shareIcon {
+              margin: 0;
+
+              &:hover {
+                fill: var(--highlight);
+              }
+            }
+          }
+
+          .articleInfo {
+            margin-left: 1rem;
+            margin-bottom: 0;
+            width: calc(100% - 50px);
+
+            p {
+              color: var(--highlight);
+              font-size: .8rem;
+              margin-top: 0;
+            }
+
+            h1 {
+              margin-bottom: 2rem;
+            }
+
+            h2 {
+              margin-bottom: 1rem;
+            }
+
+            hr {
+              display: block;
+              border-color: var(--highlight);
+              width: 100%;
+              margin-top: 2rem;
+              opacity: .3;
+            }
+          }
+        }
+
+
+        .body {
+          position: relative;
+          width: calc(100% - 50px);
+          margin-left: 48px;
+          padding-bottom: 50px;
+
+          &:before {
+            position: absolute;
+            top: 0;
+            left: -55px;
+            content: "";
+            width: 50px;
+            height: 100%;
+            background-color: var(--backgroundBlack);
+            border-right: 5px solid var(--highlight);
+          }
+        }
       }
     }
   }
 }
+
+// .page {
+//   main {
+//     margin-top: 4rem;
+//     display: flex;
+//     flex-direction: column;
+
+//     .blogTitle {
+//       margin-top: 2rem;
+//     }
+
+//     article,
+//     section {
+//       width: 100%;
+//       margin-bottom: 5rem;
+
+//       .image {
+//         border: 1px solid red;
+//       }
+//     }
+
+//     article {
+//       background-color: var(--backgroundDark);
+//       border-radius: 10px;
+
+//       p {
+//         margin: 0;
+//       }
+
+//       p:first-of-type {
+//         color: var(--highlight);
+//         font-size: .8rem;
+//       }
+
+//       div:first-of-type {
+//         overflow: hidden;
+//         border-top-left-radius: 10px;
+//         border-top-right-radius: 10px;
+//       }
+
+//       div:last-of-type {
+//         padding: 2rem;
+//       }
+//     }
+
+//     section {
+//       width: 100%;
+//       overflow: hidden;
+
+//       .content {
+//         width: 100%;
+//         display: flex;
+//         margin-top: 1rem;
+//         justify-content: left;
+//         justify-items: left;
+//         border-bottom-right-radius: 10px;
+//         overflow: hidden;
+//         background-color: var(--backgroundDark);
+
+//         .share {
+//           display: flex;
+//           flex-direction: column;
+//           align-items: center;
+//           min-width: 50px;
+//           border-right: 5px solid var(--highlight);
+//           background: var(--backgroundBlack);
+
+//           p {
+//             color: var(--highlight);
+//             font-size: .8rem;
+//           }
+
+//           .shareIcon {
+//             fill: var(--fontLight);
+//             width: 25px;
+//             margin: 1rem 0;
+
+//             &:hover {
+//               fill: var(--highlight);
+//             }
+//           }
+
+//         }
+
+
+//         div:last-of-type {
+//           border-bottom-right-radius: 10px;
+//           padding: 0 1rem 3rem;
+//           // background-color: var(--backgroundDark);
+//           overflow: hidden;
+
+//           p:first-of-type {
+//             color: var(--highlight);
+//             font-size: .8rem;
+//           }
+
+//           p:last-of-type {
+//             width: 90%;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media screen and (min-width: 1113px) {
+//   .page {
+
+//     main {
+
+//       .blogTitle {
+//         margin-top: 5rem;
+//       }
+
+//       .posts {
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: space-between;
+
+//         .blogCard {
+//           // margin-right: 1rem;
+//           max-width: 48%;
+//         }
+//       }
+
+//       section {
+//         margin-top: 4rem;
+//       }
+//     }
+//   }
+// }
