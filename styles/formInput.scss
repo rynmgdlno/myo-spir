@@ -17,15 +17,31 @@
     }
 
     textarea {
-      height: 150px;
+      height: 100px;
       resize: none;
     }
 
     .inputContainer {
+      position: relative;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
       margin-bottom: 1rem;
+
+      .check {
+        position: absolute;
+        right: 8px;
+        bottom: 10px;
+        opacity: .4;
+      }
+      
+      .checkValidated {
+        position: absolute;
+        right: 8px;
+        bottom: 10px;
+        opacity: .7;
+        fill: var(--submitButton);
+      }
     }
 
     .dualField {
@@ -37,9 +53,6 @@
       margin-bottom: 1rem;
     }
 
-    // textArea {
-
-    // }
     .buttonContainer {
       text-align: right;
 
@@ -96,7 +109,6 @@
           opacity: .7;
           fill: var(--submitButton);
         }
-        
       }
 
       .dualField {
