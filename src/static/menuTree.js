@@ -2,7 +2,7 @@ export const menuTree = [
 	{
 		"name": "About Me",
 		"id": 0,
-		"link": null,
+		"link": "/about-me",
 		"subMenu": null
 	},
 	{

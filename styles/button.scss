@@ -13,6 +13,7 @@ button {
   color: var(--fontMenu);
   transition: color .1s ease-in-out;
 
+
   &:hover {
     color: var(--highlight);
   }
@@ -30,6 +31,7 @@ button {
   &:hover {
     background-color: var(--fontLight);
   }
+
   &:active {
     background-color: var(--transparent);
     color: var(--fontLight);
@@ -55,4 +57,3 @@ button {
 }
 
 // 179, 205, 221
-

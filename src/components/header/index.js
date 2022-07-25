@@ -32,27 +32,29 @@ const Header = () => {
   return (
     <div className={`${headerClass} ${scrollClass}`}>
       <div className={styles.headerWrapper}>
-        <Link href="/">
-          <a
-            onClick={() => handleMenu("currentPage", null)}
-            className={styles.homeLink}
-          >
-            <Logo className={styles.logo} />
-          </a>
-        </Link>
-        {!showFullMenu &&
-          <Hamburger
-            toggled={menuState.isOpen}
-            toggle={() => handleMenu("isOpen", !menuState.isOpen)}
-            color="#000"
-            size={28}
-          />}
-        <Menu
-          menuState={menuState}
-          handleMenu={handleMenu}
-          showFullMenu={showFullMenu}
-          setMenuState={setMenuState}
-        />
+        <div className={styles.navWrapper}>
+          <Link href="/">
+            <a
+              onClick={() => handleMenu("currentPage", null)}
+              className={styles.homeLink}
+            >
+              <Logo className={styles.logo} />
+            </a>
+          </Link>
+          {!showFullMenu &&
+            <Hamburger
+              toggled={menuState.isOpen}
+              toggle={() => handleMenu("isOpen", !menuState.isOpen)}
+              color="#000"
+              size={28}
+            />}
+          <Menu
+            menuState={menuState}
+            handleMenu={handleMenu}
+            showFullMenu={showFullMenu}
+            setMenuState={setMenuState}
+          />
+        </div>
       </div>
     </div>
   );
