@@ -1,24 +1,7 @@
-export const AppointmentForm = () => {
-  return (
-    <div>
-      Appointment Form Goes Here
-    </div>
-  )
-}
+import { AppointmentForm } from './appointmentForm'
+import { ContactForm } from './contactForm'
 
-export const ContactForm = () => {
-  return (
-    <div>
-      Contact Form Goes Here
-    </div>
-  )
+export const Forms = {
+  AppointmentForm,
+  ContactForm,
 }
-
-export const ReferralForm = () => {
-  return (
-    <div>
-      Referral Form Goes Here
-    </div>
-  )
-}
-

@@ -1,0 +1,132 @@
+.formContainer {
+  form {
+    width: 100%;
+
+    label {
+      margin-left: .5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    input,
+    textarea {
+      font-size: var(--formFontSize);
+      background-color: var(--formFieldBackground);
+      padding: 0.6rem .8rem;
+      border-radius: 5px;
+      border: none;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    .inputContainer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-bottom: 1rem;
+
+      .check {
+        position: absolute;
+        right: 8px;
+        bottom: 10px;
+        opacity: .4;
+      }
+      
+      .checkValidated {
+        position: absolute;
+        right: 8px;
+        bottom: 10px;
+        opacity: .7;
+        fill: var(--submitButton);
+      }
+    }
+
+    .dualField {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .singleField {
+      margin-bottom: 1rem;
+    }
+
+    .buttonContainer {
+      text-align: right;
+
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .formContainer {
+    form {
+      width: 100%;
+
+      label {
+        margin-left: .5rem;
+        margin-bottom: 0.2rem;
+      }
+
+      input,
+      textarea {
+        font-size: var(--formFontSize);
+        background-color: var(--formFieldBackground);
+        padding: 0.6rem .8rem;
+        border-radius: 5px;
+        border: none;
+      }
+
+      textarea {
+        height: 150px;
+        resize: none;
+      }
+
+      p {
+        text-align: center;
+        color: var(--error);
+      }
+
+      .inputContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .check {
+          position: absolute;
+          right: 8px;
+          bottom: 10px;
+          opacity: .4;
+        }
+        
+        .checkValidated {
+          position: absolute;
+          right: 8px;
+          bottom: 10px;
+          opacity: .7;
+          fill: var(--submitButton);
+        }
+      }
+
+      .dualField {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .singleField {
+        margin-bottom: 1rem;
+      }
+
+      // textArea {
+
+      // }
+      .buttonContainer {
+        text-align: right;
+        // margin-top: 3rem;
+      }
+    }
+  }
+}

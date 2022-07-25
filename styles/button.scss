@@ -1,8 +1,11 @@
-.menuItemButton {
+button {
   appearance: none;
-  cursor: pointer;
-  border: none;
   background-color: var(--transparent);
+  border: none;
+  cursor: pointer;
+}
+
+.menuItemButton {
   height: var(--menuItemHeight);
   font-size: var(--menuItemFontSize);
   padding: 0;
@@ -15,8 +18,41 @@
   }
 }
 
+.submitButton {
+  background-color: var(--submitButton);
+  color: var(--backgroundDarkOpaque);
+  border: 1px solid var(--backgroundDarkOpaque);
+  font-size: var(--buttonFontSize);
+  padding: .5rem 1.5rem;
+  border-radius: 20px;
+  margin: 1rem;
+
+  &:hover {
+    background-color: var(--fontLight);
+  }
+  &:active {
+    background-color: var(--transparent);
+    color: var(--fontLight);
+    border-color: var(--fontLight);
+  }
+}
+
+.submitDisabled {
+  background-color: rgb(73, 78, 82);
+  color: var(--backgroundDarkOpaque);
+  border: 1px solid var(--backgroundDarkOpaque);
+  font-size: var(--buttonFontSize);
+  padding: .5rem 1.5rem;
+  border-radius: 20px;
+  margin: 1rem;
+  cursor: default;
+}
+
 @media screen and (min-width: 1113px) {
   .menuItemButton {
     font-weight: 200;
   }
 }
+
+// 179, 205, 221
+

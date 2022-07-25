@@ -1,6 +1,7 @@
 import Layout from "../src/components/layout";
 
 import "../styles/button.scss";
+import "../styles/formInput.scss";
 import "../styles/globals.css";
 import "../styles/variables.css";
 

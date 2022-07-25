@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 import { useScroll } from "../../hooks/useScroll";
-import { menuTree } from "../../generative/menuTree";
+import { menuTree } from "../../static/menuTree";
 
 import MenuItem from "./menuItem";
 

@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       <div className={styles.bgImage}/>
       <Header />
       <div className={styles.wrapper}>{children}</div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
