@@ -1,22 +1,9 @@
 export const menuTree = [
 	{
-		"name": "Tiffany Washburn",
+		"name": "About Me",
 		"id": 0,
 		"link": null,
-		"subMenu": [
-			{
-				"name": "About Me",
-				"id": 0,
-				"link": "/about-me",
-				"subMenu": null
-			},
-			{
-				"name": "My Memberships",
-				"id": 1,
-				"link": "/my-memberships",
-				"subMenu": null
-			}
-		]
+		"subMenu": null
 	},
 	{
 		"name": "Blog",
@@ -25,20 +12,8 @@ export const menuTree = [
 		"subMenu": null
 	},
 	{
-		"name": "What is Myofunctional Therapy?",
-		"id": 2,
-		"link": "/what-is-myofunctional-therapy",
-		"subMenu": null
-	},
-	{
-		"name": "How Does it Work?",
-		"id": 3,
-		"link": "/how-does-it-work",
-		"subMenu": null
-	},
-	{
 		"name": "Information",
-		"id": 4,
+		"id": 2,
 		"link": null,
 		"subMenu": [
 			{
@@ -69,20 +44,27 @@ export const menuTree = [
 	},
 	{
 		"name": "Contact",
-		"id": 5,
-		"link": "/contact",
-		"subMenu": null
-	},
-	{
-		"name": "Refer a Patient",
-		"id": 6,
-		"link": "/referrals",
-		"subMenu": null
-	},
-	{
-		"name": "Book an Appointment",
-		"id": 7,
-		"link": "/book-an-appointment",
-		"subMenu": null
+		"id": 3,
+		"link": null,
+		"subMenu": [
+			{
+				"name": "Contact",
+				"id": 0,
+				"link": "/contact",
+				"subMenu": null
+			},
+			{
+				"name": "Refer a Patient",
+				"id": 1,
+				"link": "/referrals",
+				"subMenu": null
+			},
+			{
+				"name": "Book an Appointment",
+				"id": 2,
+				"link": "/book-an-appointment",
+				"subMenu": null
+			}
+		]
 	}
 ]
