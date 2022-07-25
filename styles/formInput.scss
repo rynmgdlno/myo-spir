@@ -71,10 +71,32 @@
         resize: none;
       }
 
+      p {
+        text-align: center;
+        color: var(--error);
+      }
+
       .inputContainer {
+        position: relative;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+
+        .check {
+          position: absolute;
+          right: 8px;
+          bottom: 10px;
+          opacity: .4;
+        }
+        
+        .checkValidated {
+          position: absolute;
+          right: 8px;
+          bottom: 10px;
+          opacity: .7;
+          fill: var(--submitButton);
+        }
+        
       }
 
       .dualField {

@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import CheckIcon from '../svg/check'
+
 export const Input = ({
   name,
   type,
   placeholder,
   className,
   value,
+  checkError,
   error,
   children,
   label,
@@ -14,6 +17,7 @@ export const Input = ({
   onChange,
   ...props
 }) => {
+  const checkClass = checkError ? `check` : `checkValidated`;
   return (
     <div className="inputContainer">
       <label htmlFor={name}>
@@ -27,13 +31,13 @@ export const Input = ({
         value={value}
         className={className}
         onChange={onChange}
-        style={error && { border: "solid 1px red" }}
+        style={error ? { border: "solid 1px rgb(155, 63, 63" } : { border: "solid 1px rgb(11, 21, 26"}}
         {...props}
       />
-      {error &&
-        <p>
-          {error}
-        </p>}
+      <CheckIcon  
+        fill="rgb(183, 204, 220)"
+        className={checkClass}
+      />
     </div>
   );
 };
@@ -49,9 +53,11 @@ export const TextArea = ({
   value,
   placeholder,
   label,
+  checkError,
   error,
   ...props
 }) => {
+  const checkClass = checkError ? `check` : `checkValidated`;
   return (
     <div className="inputContainer">
       <label htmlFor={name}>
@@ -65,13 +71,12 @@ export const TextArea = ({
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        style={error && { border: "solid 1px red" }}
-        {...props}
+        style={error ? { border: "solid 1px rgb(155, 63, 63" } : { border: "solid 1px rgb(11, 21, 26"}}
       />
-      {error &&
-        <p>
-          {error}
-        </p>}
+      <CheckIcon  
+        fill="rgb(183, 204, 220)"
+        className={checkClass}
+      />
     </div>
   );
 };

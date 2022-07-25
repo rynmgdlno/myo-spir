@@ -19,7 +19,7 @@ button {
 }
 
 .submitButton {
-  background-color: rgba(179, 205, 221, 1);
+  background-color: var(--submitButton);
   color: var(--backgroundDarkOpaque);
   border: 1px solid var(--backgroundDarkOpaque);
   font-size: var(--buttonFontSize);

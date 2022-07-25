@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import * as EmailValidate from "email-validator";
 
 import { getMessage } from "../../static/messages";
 
@@ -6,6 +7,7 @@ import { Button } from "../button";
 import { Input, TextArea } from "../formInput";
 
 export const ContactForm = props => {
+  const enterRef = useRef()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,6 +25,13 @@ export const ContactForm = props => {
   });
   const { clicked, confirmation, error, fixForm, submitDisabled } = formState;
 
+  const [formErrors, setFormErrors] = useState({
+    name: true,
+    email: true,
+    subject: true,
+    message: true
+  });
+
   const handleInput = e => {
     const { name: state, value } = e.target;
     setFormData(prevState => ({
@@ -33,6 +42,13 @@ export const ContactForm = props => {
 
   const handleForm = (state, val) => {
     setFormState(prevState => ({
+      ...prevState,
+      [state]: val
+    }));
+  };
+
+  const handleErrors = (state, val) => {
+    setFormErrors(prevState => ({
       ...prevState,
       [state]: val
     }));
@@ -73,11 +89,41 @@ export const ContactForm = props => {
     }
   };
 
+  // form error setting:
+  useEffect(
+    () => {
+      if (!name) {
+        handleErrors("name", true);
+      } else {
+        handleErrors("name", false);
+      }
+      if (!EmailValidate.validate(email)) {
+        handleErrors("email", true);
+      } else {
+        handleErrors("email", false);
+      }
+      if (!subject) {
+        handleErrors("subject", true);
+      } else {
+        handleErrors("subject", false);
+      }
+      if (!message) {
+        handleErrors("message", true);
+      } else {
+        handleErrors("message", false);
+      }
+    },
+    [name, email, subject, message]
+  );
+
+  // submit disabled handling:
   useEffect(
     () => {
       if (
-        (name && email && subject && message.length > 10) &&
-        message.length < 200
+        name &&
+        EmailValidate.validate(email) &&
+        subject &&
+        message.length
       ) {
         handleForm("submitDisabled", false);
       } else {
@@ -89,38 +135,92 @@ export const ContactForm = props => {
 
   const submitClass = !submitDisabled ? `submitButton` : `submitDisabled`;
 
+
+  // Formatting input error message:
+  let errorFields = Object.entries(formErrors).filter(
+    ([_, value]) => value === true
+  );
+  const errorCount = errorFields.length;
+  errorFields = errorFields
+    .map(error => error[0])
+    .toString()
+    .split(",")
+    .join(", ");
+  const andIndex = errorFields.lastIndexOf(",");
+  errorFields =
+    errorCount > 1
+      ? errorFields.substring(0, andIndex) +
+        " &" +
+        errorFields.substring(andIndex + 1)
+      : errorFields;
+
+  const formError = `There is an error in the form. Please check the ${errorFields} field(s) and try again.`;
+
+
+  // setting input error to state error:
+  useEffect(() => {
+    if (errorCount > 0) {
+      handleForm("error", formError)
+    } else {
+      handleForm("error", null)
+    }
+  }, [errorCount, formError])
+
+
+  // enter key listener:
+  useEffect(() => {
+    const handleEnter = e => {
+      if (e.keyCode === 13) {
+        handleForm("clicked", true);
+      }
+    };
+    enterRef.current.addEventListener("keydown", handleEnter);
+    let refHolder = enterRef
+    return () => {
+      refHolder.current.removeEventListener("keydown", handleEnter)
+    }
+  }, [])
+
   return (
     <div className="formContainer">
       <h4
       >{`Hey There Pard'ner! Got some questions? Don't hesitate to reach out!`}</h4>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={enterRef}>
         <div className="dualField">
           <Input
+            checkError={!name}
+            error={clicked && !name}
             label="Your Name:"
-            name="name"
             onChange={handleInput}
+            name="name"
             value={name}
           />
           <Input
-            label="Email Address:"
-            name="email"
-            onChange={handleInput}
-            value={email}
             autoComplete="email"
+            checkError={!EmailValidate.validate(email)}
+            error={clicked && !EmailValidate.validate(email)}
+            label="Email Address:"
+            onChange={handleInput}
+            name="email"
+            value={email}
           />
         </div>
         <div className="singleField">
           <Input
+            checkError={!subject}
+            error={clicked && !subject}
             label="Subject:"
-            name="subject"
             onChange={handleInput}
+            name="subject"
             value={subject}
           />
         </div>
         <TextArea
+          checkError={!message}
+          error={clicked && !message}
           label="Message:"
-          name="message"
           onChange={handleInput}
+          name="message"
           value={message}
         />
         <div className="buttonContainer">
@@ -128,6 +228,9 @@ export const ContactForm = props => {
             Submit
           </Button>
         </div>
+        {clicked && error && <p>
+          {formError}
+        </p>}
       </form>
     </div>
   );
