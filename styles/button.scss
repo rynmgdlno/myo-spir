@@ -12,7 +12,7 @@ button {
   margin: 0;
   color: var(--fontMenu);
   transition: color .1s ease-in-out;
-
+  font-weight: var(--buttonFontWeight);
 
   &:hover {
     color: var(--highlight);
@@ -50,10 +50,3 @@ button {
   cursor: default;
 }
 
-@media screen and (min-width: 1113px) {
-  .menuItemButton {
-    font-weight: 200;
-  }
-}
-
-// 179, 205, 221

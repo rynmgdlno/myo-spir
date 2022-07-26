@@ -59,7 +59,6 @@ export const ContactForm = props => {
     e.preventDefault();
     handleForm("clicked", true);
     if (!submitDisabled) {
-      console.log("trying submit");
       handleForm("isLoading", true);
       try {
         const messageBody = {
@@ -76,7 +75,6 @@ export const ContactForm = props => {
           },
           body: JSON.stringify(messageBody)
         }).then(res => {
-          console.log(res);
           if (res.status === 200) {
             handleForm("confirmation", true);
             setFormData({
@@ -96,7 +94,6 @@ export const ContactForm = props => {
         handleForm("error", err.message);
       }
     } else {
-      console.log(`submit is disabled`);
       handleForm("submitDisabled", true);
       handleForm("fixForm", true);
     }

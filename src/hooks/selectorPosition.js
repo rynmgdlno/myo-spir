@@ -27,6 +27,5 @@ export const useSelectorPosition = () => {
     [ref, el, handleMouse]
   );
   
-  console.log(width, position);
   return [ref, width, position];
 };

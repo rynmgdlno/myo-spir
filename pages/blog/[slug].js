@@ -48,7 +48,6 @@ const Blog = props => {
   };
   const shareLink = `https://myo-spir.com/${slug}`;
   // const firstChar = documentToReactComponents(bodyText, renderOptions).filter(el => el.type === "p")[0].props.children[0].split(2)
-  // console.log(firstChar)
   return (
     <div className={styles.page}>
       <Head>

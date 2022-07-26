@@ -102,7 +102,7 @@ const MenuItem = ({
             {`${name}`}
           </Button>
         : <Link href={`${link}`}>
-            <a
+            <a 
               onClick={() => {
                 handleMenu("isOpen", null);
                 handleMenu("currentPage", id);

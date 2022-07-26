@@ -17,7 +17,8 @@
   --buttonFontSize: 15px;
   --formFontSize: 16px;
   --menuItemHeight: 25px;
-  --menuItemFontSize: 16px;
+  --menuItemFontSize: 20px;
+  --buttonFontWeight: 500;
 
   /* borders */
 
@@ -25,5 +26,11 @@
   /* animation */
 
 
+}
 
+@media screen and (min-width: 1024px) {
+  :root {
+    --menuItemFontSize: 16px;
+    --buttonFontWeight: 200;
+  }
 }

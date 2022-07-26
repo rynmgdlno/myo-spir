@@ -54,7 +54,6 @@ const Menu = ({ menuState, handleMenu, showFullMenu }) => {
             opacity: 0.4
           };
 
-          console.log(selectorClass)
   // state setter:
   const handleHighlight = useCallback((state, val) => {
     setHighlightState(prevState => ({
