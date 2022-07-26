@@ -35,7 +35,10 @@ const Header = () => {
         <div className={styles.navWrapper}>
           <Link href="/">
             <a
-              onClick={() => handleMenu("currentPage", null)}
+              onClick={() => {
+                handleMenu("currentPage", null);
+                handleMenu("isOpen", false);
+              }}
               className={styles.homeLink}
             >
               <Logo className={styles.logo} />
