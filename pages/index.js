@@ -29,7 +29,7 @@ const Home = props => {
           <i>placeholders for future content:</i>
         </p>
         <h2>
-          <i>Shorter "about me" or intro blurb?</i>
+          <i>Shorter &quot;about me&quot; or intro blurb?</i>
         </h2>
         <h1>What is Myofunctional Therapy?</h1>
         <h1>How does it work?</h1>
