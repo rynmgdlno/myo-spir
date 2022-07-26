@@ -5,7 +5,7 @@ import { getOrderedCollection } from "../src/contentful";
 
 import Header from "../src/components/header";
 
-import Logo from '../src/components/svg/logo'
+import Logo from "../src/components/svg/logo";
 
 import styles from "../styles/Home.module.scss";
 
@@ -25,7 +25,15 @@ const Home = props => {
       </Head>
 
       <main className={styles.main}>
-
+        <p>
+          <i>placeholders for future content:</i>
+        </p>
+        <h2>
+          <i>Shorter "about me" or intro blurb?</i>
+        </h2>
+        <h1>What is Myofunctional Therapy?</h1>
+        <h1>How does it work?</h1>
+        <h1>Blog</h1>
       </main>
     </div>
   );
